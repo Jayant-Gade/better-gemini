@@ -38,6 +38,10 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Detect Chrome Web Store credentials
+        id: cws
+        run: echo "ok=${{ secrets.CWS_CLIENT_ID != '' && secrets.CWS_CLIENT_SECRET != '' && secrets.CWS_REFRESH_TOKEN != '' && secrets.CWS_EXTENSION_ID != '' }}" >> "$GITHUB_OUTPUT"
+
       - name: Bump version
         id: bump
         run: |
@@ -190,6 +194,21 @@ jobs:
 
           echo "Created: ${{ steps.version.outputs.build_name }}.crx"
           echo "Size: $(du -h ${{ steps.version.outputs.build_name }}.crx | cut -f1)"
+
+      - name: Publish to Chrome Web Store
+        if: steps.cws.outputs.ok == 'true'
+        uses: mobilefirstllc/cws-publish@latest
+        with:
+          action: publish
+          client_id: ${{ secrets.CWS_CLIENT_ID }}
+          client_secret: ${{ secrets.CWS_CLIENT_SECRET }}
+          refresh_token: ${{ secrets.CWS_REFRESH_TOKEN }}
+          extension_id: ${{ secrets.CWS_EXTENSION_ID }}
+          zip_file: ${{ steps.version.outputs.build_name }}.zip
+
+      - name: Chrome Web Store not configured (note)
+        if: steps.cws.outputs.ok != 'true'
+        run: echo "::notice::CWS_CLIENT_ID / CWS_CLIENT_SECRET / CWS_REFRESH_TOKEN / CWS_EXTENSION_ID not set — skipped Chrome Web Store publish. Add them as repo secrets to enable auto-publish."
 
       - name: Upload ZIP artifact
         uses: actions/upload-artifact@v4
