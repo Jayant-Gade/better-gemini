@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Better Gemini: Wide UI, Quick Launch, Export",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Wide 98% chat layout, quick launch (type 'gem'), export to Markdown, 40+ keyboard shortcuts, default model picker. More coming!",
   "permissions": [
     "activeTab",
