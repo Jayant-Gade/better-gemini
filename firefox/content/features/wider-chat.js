@@ -27,9 +27,12 @@
   const WIDER_CHAT_CSS = `
 .conversation-container,
 .input-area-container,
-.bottom-container,
+.bottom-container,response-element,.md-content,.md-content:not(#_):not(#_),
+.md-content > :not(#_):not(#_),
+.md-content > * ,
 user-query {
   max-width: 98% !important;
+  width: 98% !important;
 }
 
 /* Expanded styling for table-block containers and nested tables */
@@ -39,8 +42,8 @@ div.table-block .table-content,
 div.table-block .table-content table {
   width: 100% !important;
   max-width: 100% !important;
-  min-width: 100% !important;
   box-sizing: border-box !important;
+  
 }
 `;
 
