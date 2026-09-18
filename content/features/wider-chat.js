@@ -26,13 +26,53 @@
   const WIDER_CHAT_CSS = `
 .conversation-container,
 .input-area-container,
-.bottom-container,
+.bottom-container,response-element,.md-content,.md-content:not(#_):not(#_),
+.md-content > :not(#_):not(#_),
+.md-content > * ,.inline-preview-container,
 user-query,
 table-block,
 .table-block,
 .table-content {
   max-width: 98% !important;
   width: 100% !important;
+}
+
+/* Expanded styling for table-block containers and nested tables */
+table-block,
+div.table-block,.md-content,
+div.table-block .table-content,
+div.table-block .table-content table,message-actions {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 100% !important;
+  margin-inline: 0 !important;
+  padding-inline: 0 !important;
+  box-sizing: border-box !important;
+  
+}
+
+thinking-overlay{
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 100% !important;
+  margin-inline: 0 !important;
+  padding-inline: 1% !important;
+  box-sizing: border-box !important;
+  
+}
+
+/* Remove margins and expand the response action bar/footer */
+.response-container-footer,
+message-actions,
+message-actions[footer],
+.actions-container-v2,
+.buttons-container-v2 {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  margin-inline: 0 !important;
+  max-width: 90% !important;
+  width: 95% !important;
+  box-sizing: border-box !important;
 }
 
 /* Allow table wrappers to use available width without clipping */
