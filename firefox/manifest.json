@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Better Gemini Fork: Wide UI, Quick Launch, Export",
-  "version": "1.0.8",
+  "name": "Better Gemini Fork: Wide UI, Export",
+  "version": "1.0.0",
   "description": "Wide 98% chat layout, quick launch (type 'gem'), export to Markdown, 40+ keyboard shortcuts, default model picker. More coming!",
   "browser_specific_settings": {
     "gecko": {
