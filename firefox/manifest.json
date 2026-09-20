@@ -1,37 +1,25 @@
 {
   "manifest_version": 3,
-  "name": "Better Gemini: Wide UI, Quick Launch, Export",
+  "name": "Better Gemini Fork: Wide UI, Quick Launch, Export",
   "version": "1.0.8",
   "description": "Wide 98% chat layout, quick launch (type 'gem'), export to Markdown, 40+ keyboard shortcuts, default model picker. More coming!",
   "browser_specific_settings": {
     "gecko": {
-      "id": "better-gemini@balakumardev.github",
+      "id": "better-gemini-fork@Jayant-Gade.github.com",
       "strict_min_version": "142.0",
       "data_collection_permissions": {
-        "required": [
-          "none"
-        ]
+        "required": ["none"]
       }
     }
   },
-  "permissions": [
-    "activeTab",
-    "storage",
-    "tabs"
-  ],
-  "host_permissions": [
-    "https://gemini.google.com/*"
-  ],
+  "permissions": ["activeTab", "storage", "tabs"],
+  "host_permissions": ["https://gemini.google.com/*"],
   "background": {
-    "scripts": [
-      "background.js"
-    ]
+    "scripts": ["background.js"]
   },
   "content_scripts": [
     {
-      "matches": [
-        "https://gemini.google.com/*"
-      ],
+      "matches": ["https://gemini.google.com/*"],
       "js": [
         "content/injector.js",
         "content/features/wider-chat.js",

@@ -1,24 +1,17 @@
 {
   "manifest_version": 3,
-  "name": "Better Gemini: Wide UI, Quick Launch, Export",
-  "version": "1.0.10",
-  "description": "Wide 98% chat layout, quick launch (type 'gem'), export to Markdown, 40+ keyboard shortcuts, default model picker. More coming!",
-  "permissions": [
-    "activeTab",
-    "storage"
-  ],
-  "host_permissions": [
-    "https://gemini.google.com/*"
-  ],
+  "name": "Better Gemini (Community Fork): Wide UI & Export",
+  "version": "1.0.0",
+  "description": "Wide 98% chat layout, quick launch (type 'gem'), export to Markdown, 40+ keyboard shortcuts, default model picker.",
+  "permissions": ["activeTab", "storage"],
+  "host_permissions": ["https://gemini.google.com/*"],
   "background": {
     "service_worker": "background.js",
     "type": "module"
   },
   "content_scripts": [
     {
-      "matches": [
-        "https://gemini.google.com/*"
-      ],
+      "matches": ["https://gemini.google.com/*"],
       "js": [
         "content/injector.js",
         "content/features/wider-chat.js",
@@ -45,8 +38,11 @@
       "48": "icons/icon48.png",
       "128": "icons/icon128.png"
     },
-    "default_title": "Better Gemini",
+    "default_title": "Better Gemini (Fork)",
     "default_popup": "popup/popup.html"
   },
-  "options_page": "options/options.html"
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  }
 }
