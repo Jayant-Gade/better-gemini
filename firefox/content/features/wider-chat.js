@@ -36,9 +36,9 @@ user-query {
 }
 
 thinking-overlay{
-  width: 100% !important;
-  max-width: 100% !important;
-  min-width: 100% !important;
+  width: 98% !important;
+  max-width: 98% !important;
+  min-width: 98% !important;
   margin-inline: 0 !important;
   padding-inline: 1% !important;
   box-sizing: border-box !important;
@@ -54,6 +54,20 @@ div.table-block .table-content table,message-actions {
   width: 100% !important;
   max-width: 100% !important;
   min-width: 100% !important;
+  margin-inline: 0 !important;
+  padding-inline: 1% !important;
+  box-sizing: border-box !important;
+  
+}
+.table-block.has-scrollbar {
+  max-width: 98% !important;
+}
+
+/*Expands weather widget*/
+.forecast-scroller,.weather-card {
+  width: 98% !important;
+  max-width: 98% !important;
+  min-width: 98% !important;
   margin-inline: 0 !important;
   padding-inline: 1% !important;
   box-sizing: border-box !important;
