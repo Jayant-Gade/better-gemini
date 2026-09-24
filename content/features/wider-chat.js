@@ -34,7 +34,7 @@ table-block,
 .table-block,
 .table-content {
   max-width: 98% !important;
-  width: 100% !important;
+  width: 98% !important;
 }
 
 /* Expanded styling for table-block containers and nested tables */
@@ -46,15 +46,14 @@ div.table-block .table-content table,message-actions {
   max-width: 100% !important;
   min-width: 100% !important;
   margin-inline: 0 !important;
-  padding-inline: 0 !important;
+  padding-inline: 1% !important;
   box-sizing: border-box !important;
-  
 }
 
 thinking-overlay{
-  width: 100% !important;
-  max-width: 100% !important;
-  min-width: 100% !important;
+  width: 98% !important;
+  max-width: 98% !important;
+  min-width: 98% !important;
   margin-inline: 0 !important;
   padding-inline: 1% !important;
   box-sizing: border-box !important;
@@ -75,13 +74,24 @@ message-actions[footer],
   box-sizing: border-box !important;
 }
 
+/*Expands weather widget*/
+.forecast-scroller,.weather-card {
+  width: 98% !important;
+  max-width: 98% !important;
+  min-width: 98% !important;
+  margin-inline: 0 !important;
+  padding-inline: 1% !important;
+  box-sizing: border-box !important;
+  
+}
+
 /* Allow table wrappers to use available width without clipping */
 table-block {
   display: block !important;
 }
 
 .table-block.has-scrollbar {
-  max-width: 100% !important;
+  max-width: 98% !important;
 }
 `;
 
