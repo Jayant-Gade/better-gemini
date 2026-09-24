@@ -1,179 +1,300 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Better Gemini Options</title>
-  <link rel="stylesheet" href="options.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
-  <div class="background-glow"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Better Gemini Fork Options</title>
+    <link rel="stylesheet" href="options.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="background-glow"></div>
 
-  <div class="container">
-    <header>
-      <div class="logo-section">
-        <div class="logo-icon">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color:#8b5cf6"/>
-                <stop offset="100%" style="stop-color:#6366f1"/>
-              </linearGradient>
-            </defs>
-            <rect width="32" height="32" rx="8" fill="url(#logoGradient)"/>
-            <path d="M10 16L14 20L22 12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="logo-text">
-          <h1>Better Gemini</h1>
-          <p class="subtitle">Enhance your AI experience</p>
-        </div>
-      </div>
-      <p class="creator-badge">
-        by <a href="https://balakumar.dev" target="_blank" rel="noopener">Bala Kumar</a>
-      </p>
-    </header>
-
-    <main>
-      <section class="settings-section">
-        <div class="section-header">
-          <span class="section-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="3"></circle>
-              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+    <div class="container">
+      <header>
+        <div class="logo-section">
+          <div class="logo-icon">
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <linearGradient
+                  id="logoGradient"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop offset="0%" style="stop-color: #8b5cf6" />
+                  <stop offset="100%" style="stop-color: #6366f1" />
+                </linearGradient>
+              </defs>
+              <rect width="32" height="32" rx="8" fill="url(#logoGradient)" />
+              <path
+                d="M10 16L14 20L22 12"
+                stroke="white"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
             </svg>
-          </span>
-          <h2>Features</h2>
-        </div>
-
-        <div class="settings-card">
-          <div class="setting-item">
-            <div class="setting-info">
-              <label for="exportMarkdown" class="setting-label">Copy as Markdown</label>
-              <p class="setting-description">Adds a "MD" button next to each response to copy it as Markdown</p>
-            </div>
-            <label class="toggle">
-              <input type="checkbox" id="exportMarkdown" checked>
-              <span class="toggle-slider"></span>
-            </label>
           </div>
-
-          <div class="setting-item">
-            <div class="setting-info">
-              <label for="exportFullChat" class="setting-label">Export Full Chat</label>
-              <p class="setting-description">Floating button to export entire conversation as Markdown</p>
-            </div>
-            <label class="toggle">
-              <input type="checkbox" id="exportFullChat" checked>
-              <span class="toggle-slider"></span>
-            </label>
-          </div>
-
-          <div class="setting-item">
-            <div class="setting-info">
-              <label for="keyboardShortcuts" class="setting-label">Keyboard Shortcuts</label>
-              <p class="setting-description">Power-user keyboard shortcuts for Gemini</p>
-            </div>
-            <label class="toggle">
-              <input type="checkbox" id="keyboardShortcuts" checked>
-              <span class="toggle-slider"></span>
-            </label>
-          </div>
-
-          <div class="setting-item">
-            <div class="setting-info">
-              <label for="widerChatWidth" class="setting-label">Wider Chat Width</label>
-              <p class="setting-description">Increase the chat container width for better readability</p>
-            </div>
-            <label class="toggle">
-              <input type="checkbox" id="widerChatWidth" checked>
-              <span class="toggle-slider"></span>
-            </label>
-          </div>
-
-          <div class="setting-item">
-            <div class="setting-info">
-              <label for="defaultModel" class="setting-label">Default Model</label>
-              <p class="setting-description">Automatically select this model for every chat</p>
-            </div>
-            <label class="toggle">
-              <input type="checkbox" id="defaultModel" checked>
-              <span class="toggle-slider"></span>
-            </label>
-          </div>
-
-          <div class="setting-item sub-setting" id="modelSelectorContainer">
-            <div class="setting-info">
-              <label for="selectedModel" class="setting-label">Preferred Model</label>
-              <p class="setting-description">Choose which model to use by default (ignored if your account doesn't offer it)</p>
-            </div>
-            <div class="select-wrapper">
-              <select id="selectedModel" class="model-select">
-                <option value="flash-lite">Flash-Lite - Fastest</option>
-                <option value="flash">Flash - Quick, all-around</option>
-                <option value="thinking">Thinking - Complex problems</option>
-                <option value="pro">Pro - Advanced math &amp; code</option>
-              </select>
-              <span class="select-arrow">
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
-                  <path d="M2 4l4 4 4-4z"/>
-                </svg>
-              </span>
-            </div>
-          </div>
-
-          <div class="setting-item sub-setting" id="effortSelectorContainer">
-            <div class="setting-info">
-              <label for="selectedEffort" class="setting-label">Thinking Level</label>
-              <p class="setting-description">Reasoning effort to apply, when the chosen model supports it</p>
-            </div>
-            <div class="select-wrapper">
-              <select id="selectedEffort" class="model-select">
-                <option value="">Don't change</option>
-                <option value="standard">Standard - Best for most</option>
-                <option value="extended">Extended - Complex problem solving</option>
-              </select>
-              <span class="select-arrow">
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
-                  <path d="M2 4l4 4 4-4z"/>
-                </svg>
-              </span>
-            </div>
+          <div class="logo-text">
+            <h1>Better Gemini Fork</h1>
+            <p class="subtitle">Enhance your AI experience</p>
           </div>
         </div>
-      </section>
-
-      <div class="actions">
-        <button id="saveButton" class="btn-primary">
-          <span class="btn-text">Save Settings</span>
-          <span class="btn-icon">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-              <polyline points="17 21 17 13 7 13 7 21"></polyline>
-              <polyline points="7 3 7 8 15 8"></polyline>
-            </svg>
-          </span>
-        </button>
-        <span id="saveStatus" class="save-status"></span>
-      </div>
-    </main>
-
-    <footer>
-      <div class="footer-content">
-        <p class="version">Version 1.0.10</p>
-        <div class="footer-divider"></div>
-        <p class="footer-credit">
-          Crafted by <a href="https://balakumar.dev" target="_blank" rel="noopener">Bala Kumar</a>
-          <span class="footer-separator">|</span>
-          <a href="mailto:mail@balakumar.dev" class="footer-email">mail@balakumar.dev</a>
+        <p class="creator-badge">
+          forked by
+          <a
+            href="https://github.com/Jayant-Gade"
+            target="_blank"
+            rel="noopener"
+            >Jayant Gade</a
+          >
         </p>
-      </div>
-    </footer>
-  </div>
+      </header>
 
-  <script src="options.js"></script>
-</body>
+      <main>
+        <section class="settings-section">
+          <div class="section-header">
+            <span class="section-icon">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="3"></circle>
+                <path
+                  d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+                ></path>
+              </svg>
+            </span>
+            <h2>Features</h2>
+          </div>
+
+          <div class="settings-card">
+            <div class="setting-item">
+              <div class="setting-info">
+                <label for="exportMarkdown" class="setting-label"
+                  >Copy as Markdown</label
+                >
+                <p class="setting-description">
+                  Adds a "MD" button next to each response to copy it as
+                  Markdown
+                </p>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" id="exportMarkdown" checked />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <label for="exportFullChat" class="setting-label"
+                  >Export Full Chat</label
+                >
+                <p class="setting-description">
+                  Floating button to export entire conversation as Markdown
+                </p>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" id="exportFullChat" checked />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <label for="keyboardShortcuts" class="setting-label"
+                  >Keyboard Shortcuts</label
+                >
+                <p class="setting-description">
+                  Power-user keyboard shortcuts for Gemini
+                </p>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" id="keyboardShortcuts" checked />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <label for="widerChatWidth" class="setting-label"
+                  >Wider Chat Width</label
+                >
+                <p class="setting-description">
+                  Increase the chat container width for better readability
+                </p>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" id="widerChatWidth" checked />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <label for="widerChatWidth" class="setting-label"
+                  >Wider Prompt Width (Coming soon!)</label
+                >
+                <p class="setting-description">
+                  Increase the chat's prompt container width for better
+                  readability
+                </p>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" id="widerPromptWidth" checked />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <label for="defaultModel" class="setting-label"
+                  >Default Model</label
+                >
+                <p class="setting-description">
+                  Automatically select this model for every chat
+                </p>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" id="defaultModel" checked />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+
+            <div class="setting-item sub-setting" id="modelSelectorContainer">
+              <div class="setting-info">
+                <label for="selectedModel" class="setting-label"
+                  >Preferred Model</label
+                >
+                <p class="setting-description">
+                  Choose which model to use by default (ignored if your account
+                  doesn't offer it)
+                </p>
+              </div>
+              <div class="select-wrapper">
+                <select id="selectedModel" class="model-select">
+                  <option value="flash-lite">Flash-Lite - Fastest</option>
+                  <option value="flash">Flash - Quick, all-around</option>
+                  <option value="thinking">Thinking - Complex problems</option>
+                  <option value="pro">Pro - Advanced math &amp; code</option>
+                </select>
+                <span class="select-arrow">
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 12 12"
+                    fill="currentColor"
+                  >
+                    <path d="M2 4l4 4 4-4z" />
+                  </svg>
+                </span>
+              </div>
+            </div>
+
+            <div class="setting-item sub-setting" id="effortSelectorContainer">
+              <div class="setting-info">
+                <label for="selectedEffort" class="setting-label"
+                  >Thinking Level</label
+                >
+                <p class="setting-description">
+                  Reasoning effort to apply, when the chosen model supports it
+                </p>
+              </div>
+              <div class="select-wrapper">
+                <select id="selectedEffort" class="model-select">
+                  <option value="">Don't change</option>
+                  <option value="standard">Standard - Best for most</option>
+                  <option value="extended">
+                    Extended - Complex problem solving
+                  </option>
+                </select>
+                <span class="select-arrow">
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 12 12"
+                    fill="currentColor"
+                  >
+                    <path d="M2 4l4 4 4-4z" />
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="actions">
+          <button id="saveButton" class="btn-primary">
+            <span class="btn-text">Save Settings</span>
+            <span class="btn-icon">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"
+                ></path>
+                <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                <polyline points="7 3 7 8 15 8"></polyline>
+              </svg>
+            </span>
+          </button>
+          <span id="saveStatus" class="save-status"></span>
+        </div>
+      </main>
+
+      <footer>
+        <div class="footer-content">
+          <p class="version">Version 1.0.0</p>
+          <div class="footer-divider"></div>
+          <p class="footer-credit">
+            Originally created by
+            <a href="https://balakumar.dev" target="_blank" rel="noopener"
+              >Bala Kumar</a
+            >
+            <span class="footer-separator">|</span>
+            <a href="mailto:mail@balakumar.dev" class="footer-email"
+              >mail@balakumar.dev</a
+            >
+          </p>
+          <p class="footer-credit">
+            Fork maintained by
+            <a
+              href="https://github.com/Jayant-Gade"
+              target="_blank"
+              rel="noopener"
+              >Jayant Gade</a
+            >
+          </p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="options.js"></script>
+  </body>
 </html>
