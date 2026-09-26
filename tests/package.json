@@ -1,6 +1,6 @@
 {
   "name": "better-gemini-tests",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Testing suite for Better Gemini Chrome Extension",
   "private": true,
   "scripts": {
@@ -39,4 +39,3 @@
     "playwright"
   ]
 }
-

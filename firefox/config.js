@@ -8,13 +8,13 @@
  */
 
 // ========== ENVIRONMENT DETECTION ==========
-const IS_TEST_ENV = typeof module !== 'undefined' && module.exports;
+const IS_TEST_ENV = typeof module !== "undefined" && module.exports;
 
 const CONFIG = {
   // Extension metadata
   meta: {
-    name: 'Better Gemini',
-    version: '1.0.8',
+    name: "Better Gemini Fork",
+    version: "1.1.0",
   },
 
   // Timing configuration
@@ -36,43 +36,43 @@ const CONFIG = {
   selectors: {
     // Main input area
     promptInput: 'div[contenteditable="true"].ql-editor',
-    promptInputFallback: 'rich-textarea',
+    promptInputFallback: "rich-textarea",
 
     // Submit/send button
     sendButton: 'button[aria-label="Send message"]',
-    sendButtonFallback: 'button.send-button',
+    sendButtonFallback: "button.send-button",
 
     // Chat container
-    chatContainer: '.conversation-container',
+    chatContainer: ".conversation-container",
 
     // Individual message elements
-    userMessage: '.user-message',
-    modelResponse: '.model-response',
+    userMessage: ".user-message",
+    modelResponse: ".model-response",
 
     // New chat button
     newChatButton: 'button[aria-label="New chat"]',
 
     // Sidebar elements
-    sidebar: '.side-nav',
-    chatHistory: '.chat-history',
+    sidebar: ".side-nav",
+    chatHistory: ".chat-history",
 
     // Loading indicators
-    loadingIndicator: '.loading-indicator',
-    streamingResponse: '.streaming',
+    loadingIndicator: ".loading-indicator",
+    streamingResponse: ".streaming",
   },
 
   // Gemini URL patterns
   urls: {
-    base: 'https://gemini.google.com',
-    app: 'https://gemini.google.com/app',
-    newChat: 'https://gemini.google.com/app',
+    base: "https://gemini.google.com",
+    app: "https://gemini.google.com/app",
+    newChat: "https://gemini.google.com/app",
   },
 
   // Storage keys for chrome.storage
   storageKeys: {
-    settings: 'betterGemini_settings',
-    history: 'betterGemini_history',
-    shortcuts: 'betterGemini_shortcuts',
+    settings: "betterGemini_settings",
+    history: "betterGemini_history",
+    shortcuts: "betterGemini_shortcuts",
   },
 
   // Default user settings
@@ -84,7 +84,7 @@ const CONFIG = {
 };
 
 // Named exports for specific values used by other modules
-const URL_PARAM = 'bg_prompt';
+const URL_PARAM = "bg_prompt";
 const DEBUG = false; // Production mode
 
 // Freeze the config to prevent accidental modifications
@@ -111,4 +111,3 @@ if (IS_TEST_ENV) {
 // ES6 exports for Chrome extension
 // These will be ignored in CommonJS environment
 export { CONFIG, URL_PARAM, DEBUG };
-

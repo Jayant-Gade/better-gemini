@@ -14,6 +14,7 @@ const DEFAULT_SETTINGS = {
   exportFullChat: true,
   keyboardShortcuts: true,
   widerChatWidth: true,
+  widerPromptWidth: true,
   defaultModel: true
 };
 
@@ -23,6 +24,7 @@ const elements = {
   exportFullChat: null,
   keyboardShortcuts: null,
   widerChatWidth: null,
+  widerPromptWidth: null,
   defaultModel: null,
   openSettings: null,
   saveIndicator: null
@@ -39,6 +41,7 @@ function initializeElements() {
   elements.exportFullChat = document.getElementById('exportFullChat');
   elements.keyboardShortcuts = document.getElementById('keyboardShortcuts');
   elements.widerChatWidth = document.getElementById('widerChatWidth');
+  elements.widerPromptWidth = document.getElementById('widerPromptWidth');
   elements.defaultModel = document.getElementById('defaultModel');
   elements.openSettings = document.getElementById('openSettings');
   elements.saveIndicator = document.getElementById('saveIndicator');
@@ -57,6 +60,7 @@ async function loadSettings() {
     elements.exportFullChat.checked = settings.exportFullChat !== false;
     elements.keyboardShortcuts.checked = settings.keyboardShortcuts !== false;
     elements.widerChatWidth.checked = settings.widerChatWidth !== false;
+    elements.widerPromptWidth.checked = settings.widerPromptWidth !== false;
     elements.defaultModel.checked = settings.defaultModel !== false;
 
     console.log('[Better Gemini Popup] Settings loaded:', settings);
@@ -67,6 +71,7 @@ async function loadSettings() {
     elements.exportFullChat.checked = true;
     elements.keyboardShortcuts.checked = true;
     elements.widerChatWidth.checked = true;
+    elements.widerPromptWidth.checked = true;
     elements.defaultModel.checked = true;
   }
 }
@@ -80,6 +85,7 @@ async function saveSettings() {
     exportFullChat: elements.exportFullChat.checked,
     keyboardShortcuts: elements.keyboardShortcuts.checked,
     widerChatWidth: elements.widerChatWidth.checked,
+    widerPromptWidth: elements.widerPromptWidth.checked,
     defaultModel: elements.defaultModel.checked
   };
 
@@ -128,6 +134,7 @@ function attachEventListeners() {
     elements.exportFullChat,
     elements.keyboardShortcuts,
     elements.widerChatWidth,
+    elements.widerPromptWidth,
     elements.defaultModel
   ];
 

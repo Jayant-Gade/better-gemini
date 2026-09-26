@@ -15,6 +15,7 @@ const DEFAULT_SETTINGS = {
   exportFullChat: true,
   keyboardShortcuts: true,
   widerChatWidth: true,
+  widerPromptWidth: true,
   defaultModel: true
 };
 
@@ -28,6 +29,7 @@ const elements = {
   exportFullChat: null,
   keyboardShortcuts: null,
   widerChatWidth: null,
+  widerPromptWidth: null,
   defaultModel: null,
   selectedModel: null,
   modelSelectorContainer: null,
@@ -45,6 +47,7 @@ function initializeElements() {
   elements.exportFullChat = document.getElementById('exportFullChat');
   elements.keyboardShortcuts = document.getElementById('keyboardShortcuts');
   elements.widerChatWidth = document.getElementById('widerChatWidth');
+  elements.widerPromptWidth = document.getElementById('widerPromptWidth');
   elements.defaultModel = document.getElementById('defaultModel');
   elements.selectedModel = document.getElementById('selectedModel');
   elements.modelSelectorContainer = document.getElementById('modelSelectorContainer');
@@ -70,6 +73,7 @@ async function loadSettings() {
     elements.exportFullChat.checked = settings.exportFullChat !== false;
     elements.keyboardShortcuts.checked = settings.keyboardShortcuts !== false;
     elements.widerChatWidth.checked = settings.widerChatWidth !== false;
+    elements.widerPromptWidth.checked = settings.widerPromptWidth !== false;
     elements.defaultModel.checked = settings.defaultModel !== false;
 
     // Apply selected model and thinking level
@@ -87,6 +91,7 @@ async function loadSettings() {
     elements.exportFullChat.checked = true;
     elements.keyboardShortcuts.checked = true;
     elements.widerChatWidth.checked = true;
+    elements.widerPromptWidth.checked = true;
     elements.defaultModel.checked = true;
     elements.selectedModel.value = DEFAULT_MODEL;
     elements.selectedEffort.value = DEFAULT_EFFORT;
@@ -112,6 +117,7 @@ async function saveSettings() {
     exportFullChat: elements.exportFullChat.checked,
     keyboardShortcuts: elements.keyboardShortcuts.checked,
     widerChatWidth: elements.widerChatWidth.checked,
+    widerPromptWidth: elements.widerPromptWidth.checked,
     defaultModel: elements.defaultModel.checked
   };
 

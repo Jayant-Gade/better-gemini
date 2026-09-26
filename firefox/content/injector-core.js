@@ -5,12 +5,12 @@
  */
 
 export const CONFIG = {
-  URL_PARAM: 'bg_prompt',
+  URL_PARAM: "bg_prompt",
   TIMEOUTS: {
     DOM_READY: 10000,
-    BEFORE_INJECTION: 500,  // Wait after input field appears before injecting
-    AFTER_INJECTION: 300,   // Wait after injection before clicking send
-    RETRY_INTERVAL: 100
+    BEFORE_INJECTION: 500, // Wait after input field appears before injecting
+    AFTER_INJECTION: 300, // Wait after injection before clicking send
+    RETRY_INTERVAL: 100,
   },
   RETRY: { MAX_ATTEMPTS: 3, DELAY: 200 },
   SELECTORS: {
@@ -24,20 +24,20 @@ export const CONFIG = {
       'button[aria-label="Send message"]',
       'button[aria-label="Send"]',
       'button[data-testid="send-button"]',
-      '.send-button',
+      ".send-button",
       'button[mattooltip="Send message"]',
     ],
     // Elements that indicate user IS logged in to Gemini
     LOGGED_IN_INDICATORS: [
-      'div[contenteditable="true"]',  // Chat input only appears when logged in
-      'rich-textarea',                 // Gemini's rich text input component
-      '[data-placeholder="Enter a prompt here"]',  // Input placeholder
+      'div[contenteditable="true"]', // Chat input only appears when logged in
+      "rich-textarea", // Gemini's rich text input component
+      '[data-placeholder="Enter a prompt here"]', // Input placeholder
     ],
     // URL patterns that definitively indicate NOT logged in
     LOGIN_PAGE_PATTERNS: [
-      'accounts.google.com/signin',
-      'accounts.google.com/v3/signin',
-      'accounts.google.com/ServiceLogin',
+      "accounts.google.com/signin",
+      "accounts.google.com/v3/signin",
+      "accounts.google.com/ServiceLogin",
     ],
   },
   DEBUG: true,
@@ -84,7 +84,7 @@ export function isUserLoggedOut(currentUrl, doc = document) {
   // Check if we're on an actual Google login page (not just a link)
   for (const pattern of CONFIG.SELECTORS.LOGIN_PAGE_PATTERNS) {
     if (currentUrl.includes(pattern)) {
-      console.log('[Better Gemini] Detected login page URL pattern:', pattern);
+      console.log("[Better Gemini] Detected login page URL pattern:", pattern);
       return true;
     }
   }
@@ -93,21 +93,23 @@ export function isUserLoggedOut(currentUrl, doc = document) {
   // If ANY logged-in indicator is present, user is logged in
   for (const selector of CONFIG.SELECTORS.LOGGED_IN_INDICATORS) {
     if (doc.querySelector(selector)) {
-      console.log('[Better Gemini] Found logged-in indicator:', selector);
-      return false;  // User IS logged in
+      console.log("[Better Gemini] Found logged-in indicator:", selector);
+      return false; // User IS logged in
     }
   }
 
   // If we're on gemini.google.com but no logged-in indicators found,
   // the page might still be loading. We should NOT immediately assume logged out.
   // Only consider logged out if we're NOT on a Gemini page
-  if (currentUrl.includes('gemini.google.com')) {
-    console.log('[Better Gemini] On Gemini page, no logged-in indicators yet - assuming still loading');
-    return false;  // Let the page continue loading
+  if (currentUrl.includes("gemini.google.com")) {
+    console.log(
+      "[Better Gemini] On Gemini page, no logged-in indicators yet - assuming still loading",
+    );
+    return false; // Let the page continue loading
   }
 
   // Not on Gemini or login page - don't interfere
-  console.log('[Better Gemini] Not on Gemini or login page');
+  console.log("[Better Gemini] Not on Gemini or login page");
   return false;
 }
 
@@ -118,21 +120,21 @@ export function injectText(inputElement, text) {
   range.selectNodeContents(inputElement);
   selection.removeAllRanges();
   selection.addRange(range);
-  return document.execCommand('insertText', false, text);
+  return document.execCommand("insertText", false, text);
 }
 
 export function injectTextWithInputEvent(inputElement, text) {
-  inputElement.textContent = '';
-  const beforeInputEvent = new InputEvent('beforeinput', {
-    inputType: 'insertText',
+  inputElement.textContent = "";
+  const beforeInputEvent = new InputEvent("beforeinput", {
+    inputType: "insertText",
     data: text,
     bubbles: true,
     cancelable: true,
   });
   inputElement.dispatchEvent(beforeInputEvent);
   inputElement.textContent = text;
-  const inputEvent = new InputEvent('input', {
-    inputType: 'insertText',
+  const inputEvent = new InputEvent("input", {
+    inputType: "insertText",
     data: text,
     bubbles: true,
     cancelable: false,
@@ -145,13 +147,18 @@ export function findSendButton(doc = document) {
   return queryWithSelectors(CONFIG.SELECTORS.SEND_BUTTON, doc);
 }
 
-export function clickSendButton(button, attempt = 1, maxAttempts = CONFIG.RETRY.MAX_ATTEMPTS) {
-  if (!button) return { success: false, reason: 'not_found' };
-  if (button.disabled || button.getAttribute('aria-disabled') === 'true') {
-    if (attempt < maxAttempts) return { success: false, reason: 'disabled', retry: true };
-    return { success: false, reason: 'disabled_after_retries' };
+export function clickSendButton(
+  button,
+  attempt = 1,
+  maxAttempts = CONFIG.RETRY.MAX_ATTEMPTS,
+) {
+  if (!button) return { success: false, reason: "not_found" };
+  if (button.disabled || button.getAttribute("aria-disabled") === "true") {
+    if (attempt < maxAttempts)
+      return { success: false, reason: "disabled", retry: true };
+    return { success: false, reason: "disabled_after_retries" };
   }
-  const clickEvent = new MouseEvent('click', {
+  const clickEvent = new MouseEvent("click", {
     bubbles: true,
     cancelable: true,
     view: window,
@@ -161,6 +168,5 @@ export function clickSendButton(button, attempt = 1, maxAttempts = CONFIG.RETRY.
 }
 
 export function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
-

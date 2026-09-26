@@ -1,10 +1,10 @@
-# Privacy Policy for Better Gemini
+# Privacy Policy for Better Gemini Fork
 
 **Last Updated:** January 7, 2026
 
 ## Overview
 
-Better Gemini ("the Extension") is a browser extension that enhances your Google Gemini experience with UI improvements and productivity features. We are committed to protecting your privacy and being transparent about our data practices.
+Better Gemini Fork ("the Extension") is a browser extension that enhances your Google Gemini experience with UI improvements and productivity features. We are committed to protecting your privacy and being transparent about our data practices.
 
 **In short: We do not collect, store, or transmit any of your personal data or conversations.**
 
@@ -70,15 +70,15 @@ We may update this Privacy Policy from time to time. Any changes will be reflect
 
 ## Open Source
 
-Better Gemini is open source. You can review the complete source code to verify our privacy practices:
+Better Gemini Fork is open source. You can review the complete source code to verify our privacy practices:
 
-**GitHub Repository:** [https://github.com/balakumardev/better-gemini](https://github.com/balakumardev/better-gemini)
+**GitHub Repository:** [https://github.com/Jayant-Gade/better-gemini](https://github.com/Jayant-Gade/better-gemini)
 
 ## Contact
 
 If you have any questions about this Privacy Policy, please open an issue on our GitHub repository:
 
-[https://github.com/balakumardev/better-gemini/issues](https://github.com/balakumardev/better-gemini/issues)
+[https://github.com/Jayant-Gade/better-gemini/issues](https://github.com/Jayant-Gade/better-gemini/issues)
 
 ---
 

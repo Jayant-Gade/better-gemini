@@ -1,11 +1,10 @@
 /**
- * Better Gemini Extension - Wider Chat Width Feature
+ * Better Gemini Extension - Wider Prompt Width Feature
  *
- * This module increases the chat container and table block width for a better reading experience.
+ * This module increases the chat's prompt container width for a better readability experience.
  *
  * Features:
- * - Injects CSS to set max-width to 98% on conversation containers
- * - Expands table blocks and nested table containers to full width
+ * - Injects CSS to expand prompt containers and input boxes
  * - Uses MutationObserver to handle dynamically loaded content
  * - Persists styles across SPA navigation
  *
@@ -16,88 +15,41 @@
   "use strict";
 
   // ========== ENVIRONMENT DETECTION ==========
-  const IS_TEST_ENV_WIDER = typeof module !== "undefined" && module.exports;
-  const IS_BROWSER_ENV_WIDER =
+  const IS_TEST_ENV_PROMPT = typeof module !== "undefined" && module.exports;
+  const IS_BROWSER_ENV_PROMPT =
     typeof window !== "undefined" && typeof document !== "undefined";
 
   // ========== CONFIGURATION ==========
 
-  const STYLE_ID = "better-gemini-wider-chat";
+  const STYLE_ID = "better-gemini-wider-prompt";
 
-  const WIDER_CHAT_CSS = `
-.conversation-container,
-.bottom-container,response-element,.md-content,.md-content:not(#_):not(#_),
-.md-content > :not(#_):not(#_),.input-area-container,
-.md-content > * ,.inline-preview-container,
-user-query {
+  const WIDER_PROMPT_CSS = `
+/* Selectors for prompt containers, input areas, and user query boxes */
+.prompt-container,.file-preview-container,.user-query-container,user-query-content,
+textarea {
   max-width: 98% !important;
-  width: 98% !important;
+  width: max-content !important;
+  margin-left: auto !important;
+  box-sizing: content-box !important;
 }
 
-thinking-overlay{
-  width: 98% !important;
-  max-width: 98% !important;
-  min-width: 98% !important;
-  margin-inline: 0 !important;
-  padding-inline: 1% !important;
-  box-sizing: border-box !important;
-  
-}
-
-  
-/* Expanded styling for table-block containers and nested tables */
-table-block,
-div.table-block,.md-content,
-div.table-block .table-content,
-div.table-block .table-content table,message-actions {
-  width: 100% !important;
+.query-text-line,.query-content,.query-bubble-with-status,.user-query-bubble-with-background {
   max-width: 100% !important;
-  min-width: 100% !important;
-  margin-inline: 0 !important;
-  padding-inline: 1% !important;
-  box-sizing: border-box !important;
-  
-}
-.table-block.has-scrollbar {
-  max-width: 98% !important;
-}
-
-/*Expands weather widget*/
-.forecast-scroller,.weather-card {
-  width: 98% !important;
-  max-width: 98% !important;
-  min-width: 98% !important;
-  margin-inline: 0 !important;
-  padding-inline: 1% !important;
-  box-sizing: border-box !important;
-  
-}
-
-
-/* Remove margins and expand the response action bar/footer */
-.response-container-footer,
-message-actions,
-message-actions[footer],
-.actions-container-v2,
-.buttons-container-v2 {
-  margin-left: 0 !important;
+  width: max-content !important;
+  box-sizing: content-box !important;
+  text-align: left !important;   /* Keeps the text reading normally inside */
+  margin-left: 0 !important;     /* Prevents children from inheriting auto margins */
   margin-right: 0 !important;
-  margin-inline: 0 !important;
-  max-width: 90% !important;
-  width: 95% !important;
-  box-sizing: border-box !important;
 }
-
+  
 `;
 
-  // Selectors to watch for dynamic content
+  // Selectors to watch for dynamic content related to prompts
   const WATCHED_SELECTORS = [
-    ".conversation-container",
     ".input-area-container",
-    ".bottom-container",
+    "rich-textarea",
     "user-query",
-    "table-block",
-    "div.table-block",
+    ".prompt-container",
   ];
 
   // ========== STATE ==========
@@ -121,7 +73,7 @@ message-actions[footer],
     const style = document.createElement("style");
     style.id = STYLE_ID;
     style.type = "text/css";
-    style.textContent = WIDER_CHAT_CSS;
+    style.textContent = WIDER_PROMPT_CSS;
 
     const targetParent = document.head || document.documentElement;
     if (targetParent) {
@@ -188,7 +140,7 @@ message-actions[footer],
   // ========== PUBLIC API ==========
 
   /**
-   * Initializes the wider chat feature
+   * Initializes the wider prompt feature
    * - Injects CSS styles
    * - Sets up MutationObserver for dynamic content
    */
@@ -207,7 +159,7 @@ message-actions[footer],
   }
 
   /**
-   * Destroys the wider chat feature
+   * Destroys the wider prompt feature
    * - Removes injected styles
    * - Disconnects MutationObserver
    */
@@ -229,13 +181,13 @@ message-actions[footer],
 
   // ========== EXPORTS ==========
 
-  if (IS_TEST_ENV_WIDER) {
+  if (IS_TEST_ENV_PROMPT) {
     module.exports = {
       init,
       destroy,
       _internals: {
         STYLE_ID,
-        WIDER_CHAT_CSS,
+        WIDER_PROMPT_CSS,
         WATCHED_SELECTORS,
         injectStyles,
         removeStyles,
@@ -247,8 +199,8 @@ message-actions[footer],
     };
   }
 
-  if (IS_BROWSER_ENV_WIDER && !IS_TEST_ENV_WIDER) {
-    window.BetterGeminiWiderChat = {
+  if (IS_BROWSER_ENV_PROMPT && !IS_TEST_ENV_PROMPT) {
+    window.BetterGeminiWiderPrompt = {
       init,
       destroy,
     };

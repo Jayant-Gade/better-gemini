@@ -1,165 +1,125 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Better Gemini</title>
-    <link rel="stylesheet" href="popup.css" />
-  </head>
-  <body>
-    <div class="popup-container">
-      <header class="popup-header">
-        <div class="brand">
-          <div class="logo-icon">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12 2L2 7L12 12L22 7L12 2Z"
-                stroke="url(#gradient)"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M2 17L12 22L22 17"
-                stroke="url(#gradient)"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M2 12L12 17L22 12"
-                stroke="url(#gradient)"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <defs>
-                <linearGradient
-                  id="gradient"
-                  x1="2"
-                  y1="2"
-                  x2="22"
-                  y2="22"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stop-color="#8b5cf6" />
-                  <stop offset="1" stop-color="#6366f1" />
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-          <h1 class="title">Better Gemini Fork</h1>
-        </div>
-        <span class="version-badge">v1.0.0</span>
-      </header>
 
-      <main class="toggles-container">
-        <div class="toggle-item">
-          <div class="toggle-info">
-            <span class="toggle-label">Copy as Markdown</span>
-            <span class="toggle-description">MD button for responses</span>
-          </div>
-          <label class="toggle-switch">
-            <input type="checkbox" id="exportMarkdown" />
-            <span class="toggle-slider"></span>
-          </label>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Better Gemini Fork</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
 
-        <div class="toggle-item">
-          <div class="toggle-info">
-            <span class="toggle-label">Export Full Chat</span>
-            <span class="toggle-description">Export entire conversation</span>
-          </div>
-          <label class="toggle-switch">
-            <input type="checkbox" id="exportFullChat" />
-            <span class="toggle-slider"></span>
-          </label>
-        </div>
-
-        <div class="toggle-item">
-          <div class="toggle-info">
-            <span class="toggle-label">Keyboard Shortcuts</span>
-            <span class="toggle-description">Power-user hotkeys</span>
-          </div>
-          <label class="toggle-switch">
-            <input type="checkbox" id="keyboardShortcuts" />
-            <span class="toggle-slider"></span>
-          </label>
-        </div>
-
-        <div class="toggle-item">
-          <div class="toggle-info">
-            <span class="toggle-label">Wider Chat Width</span>
-            <span class="toggle-description">Expanded container</span>
-          </div>
-          <label class="toggle-switch">
-            <input type="checkbox" id="widerChatWidth" />
-            <span class="toggle-slider"></span>
-          </label>
-        </div>
-
-        <div class="toggle-item">
-          <div class="toggle-info">
-            <span class="toggle-label">Wider Prompt Width</span>
-            <span class="toggle-description"
-              >Expanded prompt container (Coming soon!)</span
-            >
-          </div>
-          <label class="toggle-switch">
-            <input type="checkbox" id="widerPromptWidth" />
-            <span class="toggle-slider"></span>
-          </label>
-        </div>
-
-        <div class="toggle-item">
-          <div class="toggle-info">
-            <span class="toggle-label">Default Model</span>
-            <span class="toggle-description">Auto-select model</span>
-          </div>
-          <label class="toggle-switch">
-            <input type="checkbox" id="defaultModel" />
-            <span class="toggle-slider"></span>
-          </label>
-        </div>
-      </main>
-
-      <footer class="popup-footer">
-        <a href="#" id="openSettings" class="settings-link">
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <circle cx="12" cy="12" r="3"></circle>
-            <path
-              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v1.0a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
-            ></path>
+<body>
+  <div class="popup-container">
+    <header class="popup-header">
+      <div class="brand">
+        <div class="logo-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="url(#gradient)" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path d="M2 17L12 22L22 17" stroke="url(#gradient)" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path d="M2 12L12 17L22 12" stroke="url(#gradient)" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <defs>
+              <linearGradient id="gradient" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#8b5cf6" />
+                <stop offset="1" stop-color="#6366f1" />
+              </linearGradient>
+            </defs>
           </svg>
-          Open full settings
-        </a>
-        <a
-          href="https://github.com/Jayant-Gade"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="credit-link"
-          >forked by Jayant Gade</a
-        >
-      </footer>
+        </div>
+        <h1 class="title">Better Gemini Fork</h1>
+      </div>
+      <span class="version-badge">v1.1.0</span>
+    </header>
 
-      <div id="saveIndicator" class="save-indicator">Saved</div>
-    </div>
+    <main class="toggles-container">
+      <div class="toggle-item">
+        <div class="toggle-info">
+          <span class="toggle-label">Copy as Markdown</span>
+          <span class="toggle-description">MD button for responses</span>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="exportMarkdown" />
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
 
-    <script src="popup.js"></script>
-  </body>
+      <div class="toggle-item">
+        <div class="toggle-info">
+          <span class="toggle-label">Export Full Chat</span>
+          <span class="toggle-description">Export entire conversation</span>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="exportFullChat" />
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+
+      <div class="toggle-item">
+        <div class="toggle-info">
+          <span class="toggle-label">Keyboard Shortcuts</span>
+          <span class="toggle-description">Power-user hotkeys</span>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="keyboardShortcuts" />
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+
+      <div class="toggle-item">
+        <div class="toggle-info">
+          <span class="toggle-label">Wider Chat Width</span>
+          <span class="toggle-description">Expanded container</span>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="widerChatWidth" />
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+
+      <div class="toggle-item">
+        <div class="toggle-info">
+          <span class="toggle-label">Wider Prompt Width</span>
+          <span class="toggle-description">Expanded prompt container</span>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="widerPromptWidth" />
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+
+      <div class="toggle-item">
+        <div class="toggle-info">
+          <span class="toggle-label">Default Model</span>
+          <span class="toggle-description">Auto-select model</span>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="defaultModel" />
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </main>
+
+    <footer class="popup-footer">
+      <a href="#" id="openSettings" class="settings-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path
+            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v1.0a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+          </path>
+        </svg>
+        Open full settings
+      </a>
+      <a href="https://github.com/Jayant-Gade" target="_blank" rel="noopener noreferrer" class="credit-link">forked by
+        Jayant Gade</a>
+    </footer>
+
+    <div id="saveIndicator" class="save-indicator">Saved</div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+
 </html>

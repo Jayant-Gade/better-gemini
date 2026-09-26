@@ -6,7 +6,7 @@ Idempotent: existing screenshots are deleted and re-uploaded, so re-running is s
 Handles AMO's write throttling (HTTP 429) with backoff. Runs in GitHub Actions.
 
 AMO_ADDON may be the add-on's numeric id, slug, or GUID — the GUID
-(better-gemini@balakumardev.github) is used by default so this works even before
+(better-gemini-fork@Jayant-Gade.github.com) is used by default so this works even before
 AMO assigns a public slug.
 """
 import base64, hashlib, hmac, json, os, re, sys, time
@@ -14,7 +14,7 @@ from secrets import token_hex
 import requests
 
 BASE = "https://addons.mozilla.org/api/v5"
-ADDON = os.environ.get("AMO_ADDON", "better-gemini@balakumardev.github")
+ADDON = os.environ.get("AMO_ADDON", "better-gemini-fork@Jayant-Gade.github.com")
 ISS = os.environ.get("AMO_JWT_ISSUER", "")
 SEC = os.environ.get("AMO_JWT_SECRET", "")
 HERE = os.path.dirname(os.path.abspath(__file__))

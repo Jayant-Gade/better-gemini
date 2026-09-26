@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Better Gemini (Community Fork): Wide UI & Export",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Wide 98% chat layout, quick launch (type 'gem'), export to Markdown, 40+ keyboard shortcuts, default model picker.",
   "permissions": ["activeTab", "storage"],
   "host_permissions": ["https://gemini.google.com/*"],
@@ -15,6 +15,7 @@
       "js": [
         "content/injector.js",
         "content/features/wider-chat.js",
+        "content/features/wider-prompt.js",
         "content/features/keyboard-shortcuts.js",
         "content/features/export-markdown.js",
         "content/features/export-full-chat.js",

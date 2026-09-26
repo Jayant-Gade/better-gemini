@@ -11,15 +11,15 @@ function createStorageArea() {
 
   // Implementation functions
   const getImpl = (keys, callback) => {
-    if (typeof keys === 'function') {
+    if (typeof keys === "function") {
       callback = keys;
       keys = null;
     }
     const result = keys
       ? Object.fromEntries(
           (Array.isArray(keys) ? keys : [keys])
-            .filter(k => k in data)
-            .map(k => [k, data[k]])
+            .filter((k) => k in data)
+            .map((k) => [k, data[k]]),
         )
       : { ...data };
     if (callback) callback(result);
@@ -33,7 +33,7 @@ function createStorageArea() {
   };
 
   const removeImpl = (keys, callback) => {
-    (Array.isArray(keys) ? keys : [keys]).forEach(k => delete data[k]);
+    (Array.isArray(keys) ? keys : [keys]).forEach((k) => delete data[k]);
     if (callback) callback();
     return Promise.resolve();
   };
@@ -50,7 +50,9 @@ function createStorageArea() {
     remove: jest.fn(removeImpl),
     clear: jest.fn(clearImpl),
     _getData: () => data,
-    _setData: (newData) => { data = newData; },
+    _setData: (newData) => {
+      data = newData;
+    },
     _reset: () => {
       data = {};
       mock.get.mockClear();
@@ -72,7 +74,7 @@ function createStorageArea() {
  * Creates mock tabs API
  */
 function createTabsMock() {
-  let tabs = [{ id: 1, url: 'https://example.com', active: true, windowId: 1 }];
+  let tabs = [{ id: 1, url: "https://example.com", active: true, windowId: 1 }];
 
   // Implementation functions (not mocks)
   const createImpl = async (options) => {
@@ -82,24 +84,25 @@ function createTabsMock() {
   };
 
   const updateImpl = async (tabId, updateProperties) => {
-    const tab = tabs.find(t => t.id === tabId);
+    const tab = tabs.find((t) => t.id === tabId);
     if (tab) Object.assign(tab, updateProperties);
     return tab;
   };
 
   const queryImpl = async (queryInfo) => {
-    const result = tabs.filter(tab => {
-      if (queryInfo.active !== undefined && tab.active !== queryInfo.active) return false;
+    const result = tabs.filter((tab) => {
+      if (queryInfo.active !== undefined && tab.active !== queryInfo.active)
+        return false;
       if (queryInfo.currentWindow && tab.windowId !== 1) return false;
       return true;
     });
     return result;
   };
 
-  const getImpl = async (tabId) => tabs.find(t => t.id === tabId);
+  const getImpl = async (tabId) => tabs.find((t) => t.id === tabId);
 
   const removeImpl = async (tabId) => {
-    tabs = tabs.filter(t => t.id !== tabId);
+    tabs = tabs.filter((t) => t.id !== tabId);
   };
 
   const mock = {
@@ -109,9 +112,11 @@ function createTabsMock() {
     get: jest.fn(getImpl),
     remove: jest.fn(removeImpl),
     _getTabs: () => tabs,
-    _setTabs: (newTabs) => { tabs = newTabs; },
+    _setTabs: (newTabs) => {
+      tabs = newTabs;
+    },
     _reset: () => {
-      tabs = [{ id: 1, url: 'https://example.com', active: true, windowId: 1 }];
+      tabs = [{ id: 1, url: "https://example.com", active: true, windowId: 1 }];
       // Clear call history but keep implementation
       mock.create.mockClear();
       mock.update.mockClear();
@@ -144,29 +149,41 @@ function createOmniboxMock() {
   return {
     setDefaultSuggestion: jest.fn(),
     onInputChanged: {
-      addListener: jest.fn((callback) => listeners.onInputChanged.push(callback)),
+      addListener: jest.fn((callback) =>
+        listeners.onInputChanged.push(callback),
+      ),
       removeListener: jest.fn((callback) => {
         const idx = listeners.onInputChanged.indexOf(callback);
         if (idx > -1) listeners.onInputChanged.splice(idx, 1);
       }),
-      _trigger: (text, suggest) => listeners.onInputChanged.forEach(cb => cb(text, suggest)),
+      _trigger: (text, suggest) =>
+        listeners.onInputChanged.forEach((cb) => cb(text, suggest)),
     },
     onInputEntered: {
-      addListener: jest.fn((callback) => listeners.onInputEntered.push(callback)),
+      addListener: jest.fn((callback) =>
+        listeners.onInputEntered.push(callback),
+      ),
       removeListener: jest.fn((callback) => {
         const idx = listeners.onInputEntered.indexOf(callback);
         if (idx > -1) listeners.onInputEntered.splice(idx, 1);
       }),
-      _trigger: (text, disposition) => listeners.onInputEntered.forEach(cb => cb(text, disposition)),
+      _trigger: (text, disposition) =>
+        listeners.onInputEntered.forEach((cb) => cb(text, disposition)),
     },
     onInputStarted: {
-      addListener: jest.fn((callback) => listeners.onInputStarted.push(callback)),
+      addListener: jest.fn((callback) =>
+        listeners.onInputStarted.push(callback),
+      ),
     },
     onInputCancelled: {
-      addListener: jest.fn((callback) => listeners.onInputCancelled.push(callback)),
+      addListener: jest.fn((callback) =>
+        listeners.onInputCancelled.push(callback),
+      ),
     },
     _reset: () => {
-      Object.keys(listeners).forEach(k => { listeners[k] = []; });
+      Object.keys(listeners).forEach((k) => {
+        listeners[k] = [];
+      });
     },
   };
 }
@@ -180,8 +197,8 @@ function createRuntimeMock() {
 
   return {
     getManifest: jest.fn(() => ({
-      name: 'Better Gemini',
-      version: '1.0.0',
+      name: "Better Gemini",
+      version: "1.1.0",
       manifest_version: 3,
     })),
     onMessage: {
@@ -191,11 +208,11 @@ function createRuntimeMock() {
         if (idx > -1) messageListeners.splice(idx, 1);
       }),
       _trigger: (message, sender, sendResponse) =>
-        messageListeners.forEach(cb => cb(message, sender, sendResponse)),
+        messageListeners.forEach((cb) => cb(message, sender, sendResponse)),
     },
     onInstalled: {
       addListener: jest.fn((callback) => installedListeners.push(callback)),
-      _trigger: (details) => installedListeners.forEach(cb => cb(details)),
+      _trigger: (details) => installedListeners.forEach((cb) => cb(details)),
     },
     sendMessage: jest.fn(async (message) => ({ received: true })),
     _reset: () => {
@@ -239,5 +256,10 @@ const chromeMock = {
   },
 };
 
-module.exports = { chromeMock, createStorageArea, createTabsMock, createOmniboxMock, createRuntimeMock };
-
+module.exports = {
+  chromeMock,
+  createStorageArea,
+  createTabsMock,
+  createOmniboxMock,
+  createRuntimeMock,
+};

@@ -6,7 +6,7 @@ A browser extension that enhances Google Gemini with wider chat layout, Markdown
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Chrome Extension](https://img.shields.io/badge/Manifest-V3-green.svg)](https://developer.chrome.com/docs/extensions/mv3/intro/)
-[![Firefox Compatible](https://img.shields.io/badge/Firefox-Supported-orange.svg)](firefox/)
+[![Firefox Add-on](https://img.shields.io/badge/Firefox-Add--on-orange.svg)](https://addons.mozilla.org/en-US/firefox/addon/better-gemini-fork-wide-ui/)
 [![Privacy First](https://img.shields.io/badge/Privacy-100%25%20Local-brightgreen.svg)](#privacy--permissions)
 
 ---
@@ -64,8 +64,10 @@ A browser extension that enhances Google Gemini with wider chat layout, Markdown
 
 ### Firefox
 
-1. Go to `about:debugging#/runtime/this-firefox`.
-2. Click **Load Temporary Add-on...** and select `firefox/manifest.json`.
+- **Install from Firefox Add-ons:** [Better Gemini Fork on AMO](https://addons.mozilla.org/en-US/firefox/addon/better-gemini-fork-wide-ui/)
+- **Or Load Temporarily for Development:**
+  1. Go to `about:debugging#/runtime/this-firefox`.
+  2. Click **Load Temporary Add-on...** and select `firefox/manifest.json`.
 
 ---
 
@@ -132,4 +134,5 @@ better-gemini/
 ## License & Credits
 
 - Originally created by **[Bala Kumar](https://balakumar.dev)** ([original repository](https://github.com/balakumardev/better-gemini)).
+- Fork maintained by **[Jayant Gade](https://github.com/Jayant-Gade)**.
 - Licensed under the [MIT License](LICENSE).

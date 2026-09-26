@@ -7,15 +7,19 @@
  * Features are loaded from separate scripts and controlled via the options page.
  */
 
-(function() {
-  'use strict';
+(function () {
+  "use strict";
 
   // ========== ENVIRONMENT DETECTION ==========
-  var IS_TEST_ENV = typeof process !== 'undefined' && process.versions && process.versions.node;
-  var IS_BROWSER_ENV = typeof window !== 'undefined' && typeof document !== 'undefined' && typeof chrome !== 'undefined';
+  var IS_TEST_ENV =
+    typeof process !== "undefined" && process.versions && process.versions.node;
+  var IS_BROWSER_ENV =
+    typeof window !== "undefined" &&
+    typeof document !== "undefined" &&
+    typeof chrome !== "undefined";
 
   // ========== CONFIGURATION ==========
-  var STORAGE_KEY = 'betterGemini_features';
+  var STORAGE_KEY = "betterGemini_features";
 
   // Default settings - all features enabled by default
   var DEFAULT_SETTINGS = {
@@ -23,12 +27,13 @@
     exportFullChat: true,
     keyboardShortcuts: true,
     widerChatWidth: true,
+    widerPromptWidth: true,
     defaultModel: true,
   };
 
   // ========== LOGGING ==========
   function log(message, data) {
-    var prefix = '[Better Gemini Loader]';
+    var prefix = "[Better Gemini Loader]";
     if (data !== undefined) {
       console.log(prefix, message, data);
     } else {
@@ -37,7 +42,7 @@
   }
 
   function logError(message, error) {
-    var prefix = '[Better Gemini Loader Error]';
+    var prefix = "[Better Gemini Loader Error]";
     if (error) {
       console.error(prefix, message, error);
     } else {
@@ -51,6 +56,7 @@
     exportFullChat: false,
     keyboardShortcuts: false,
     widerChatWidth: false,
+    widerPromptWidth: false,
     defaultModel: false,
   };
 
@@ -62,19 +68,23 @@
    * @returns {Promise<Object>} Settings object
    */
   function loadSettings() {
-    return new Promise(function(resolve) {
+    return new Promise(function (resolve) {
       try {
-        if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.sync) {
-          chrome.storage.sync.get(STORAGE_KEY, function(result) {
+        if (
+          typeof chrome !== "undefined" &&
+          chrome.storage &&
+          chrome.storage.sync
+        ) {
+          chrome.storage.sync.get(STORAGE_KEY, function (result) {
             var settings = result[STORAGE_KEY] || DEFAULT_SETTINGS;
-            log('Settings loaded:', settings);
+            log("Settings loaded:", settings);
             resolve(settings);
           });
         } else {
           resolve(DEFAULT_SETTINGS);
         }
       } catch (error) {
-        logError('Failed to load settings:', error);
+        logError("Failed to load settings:", error);
         resolve(DEFAULT_SETTINGS);
       }
     });
@@ -90,16 +100,19 @@
       return;
     }
 
-    if (window.BetterGeminiExport && typeof window.BetterGeminiExport.init === 'function') {
+    if (
+      window.BetterGeminiExport &&
+      typeof window.BetterGeminiExport.init === "function"
+    ) {
       try {
         window.BetterGeminiExport.init();
         featuresInitialized.exportMarkdown = true;
-        log('Export Markdown feature initialized');
+        log("Export Markdown feature initialized");
       } catch (error) {
-        logError('Failed to initialize Export Markdown:', error);
+        logError("Failed to initialize Export Markdown:", error);
       }
     } else {
-      logError('Export Markdown feature not found on window');
+      logError("Export Markdown feature not found on window");
     }
   }
 
@@ -111,16 +124,19 @@
       return;
     }
 
-    if (window.BetterGeminiExportFullChat && typeof window.BetterGeminiExportFullChat.init === 'function') {
+    if (
+      window.BetterGeminiExportFullChat &&
+      typeof window.BetterGeminiExportFullChat.init === "function"
+    ) {
       try {
         window.BetterGeminiExportFullChat.init();
         featuresInitialized.exportFullChat = true;
-        log('Export Full Chat feature initialized');
+        log("Export Full Chat feature initialized");
       } catch (error) {
-        logError('Failed to initialize Export Full Chat:', error);
+        logError("Failed to initialize Export Full Chat:", error);
       }
     } else {
-      logError('Export Full Chat feature not found on window');
+      logError("Export Full Chat feature not found on window");
     }
   }
 
@@ -132,13 +148,16 @@
       return;
     }
 
-    if (window.BetterGeminiExportFullChat && typeof window.BetterGeminiExportFullChat.destroy === 'function') {
+    if (
+      window.BetterGeminiExportFullChat &&
+      typeof window.BetterGeminiExportFullChat.destroy === "function"
+    ) {
       try {
         window.BetterGeminiExportFullChat.destroy();
         featuresInitialized.exportFullChat = false;
-        log('Export Full Chat feature destroyed');
+        log("Export Full Chat feature destroyed");
       } catch (error) {
-        logError('Failed to destroy Export Full Chat:', error);
+        logError("Failed to destroy Export Full Chat:", error);
       }
     }
   }
@@ -151,16 +170,19 @@
       return;
     }
 
-    if (window.BetterGeminiKeyboardShortcuts && typeof window.BetterGeminiKeyboardShortcuts.init === 'function') {
+    if (
+      window.BetterGeminiKeyboardShortcuts &&
+      typeof window.BetterGeminiKeyboardShortcuts.init === "function"
+    ) {
       try {
         window.BetterGeminiKeyboardShortcuts.init();
         featuresInitialized.keyboardShortcuts = true;
-        log('Keyboard Shortcuts feature initialized');
+        log("Keyboard Shortcuts feature initialized");
       } catch (error) {
-        logError('Failed to initialize Keyboard Shortcuts:', error);
+        logError("Failed to initialize Keyboard Shortcuts:", error);
       }
     } else {
-      logError('Keyboard Shortcuts feature not found on window');
+      logError("Keyboard Shortcuts feature not found on window");
     }
   }
 
@@ -172,16 +194,40 @@
       return;
     }
 
-    if (window.BetterGeminiWiderChat && typeof window.BetterGeminiWiderChat.init === 'function') {
+    if (
+      window.BetterGeminiWiderChat &&
+      typeof window.BetterGeminiWiderChat.init === "function"
+    ) {
       try {
         window.BetterGeminiWiderChat.init();
         featuresInitialized.widerChatWidth = true;
-        log('Wider Chat feature initialized');
+        log("Wider Chat feature initialized");
       } catch (error) {
-        logError('Failed to initialize Wider Chat:', error);
+        logError("Failed to initialize Wider Chat:", error);
       }
     } else {
-      logError('Wider Chat feature not found on window');
+      logError("Wider Chat feature not found on window");
+    }
+  }
+  /* wider prompt */
+  function initWiderPrompt() {
+    if (featuresInitialized.widerPromptWidth) {
+      return;
+    }
+
+    if (
+      window.BetterGeminiWiderPrompt &&
+      typeof window.BetterGeminiWiderPrompt.init === "function"
+    ) {
+      try {
+        window.BetterGeminiWiderPrompt.init();
+        featuresInitialized.widerPromptWidth = true;
+        log("Wider Prompt feature initialized");
+      } catch (error) {
+        logError("Failed to initialize Wider Prompt:", error);
+      }
+    } else {
+      logError("Wider Prompt feature not found on window");
     }
   }
 
@@ -193,13 +239,16 @@
       return;
     }
 
-    if (window.BetterGeminiKeyboardShortcuts && typeof window.BetterGeminiKeyboardShortcuts.destroy === 'function') {
+    if (
+      window.BetterGeminiKeyboardShortcuts &&
+      typeof window.BetterGeminiKeyboardShortcuts.destroy === "function"
+    ) {
       try {
         window.BetterGeminiKeyboardShortcuts.destroy();
         featuresInitialized.keyboardShortcuts = false;
-        log('Keyboard Shortcuts feature destroyed');
+        log("Keyboard Shortcuts feature destroyed");
       } catch (error) {
-        logError('Failed to destroy Keyboard Shortcuts:', error);
+        logError("Failed to destroy Keyboard Shortcuts:", error);
       }
     }
   }
@@ -212,13 +261,35 @@
       return;
     }
 
-    if (window.BetterGeminiWiderChat && typeof window.BetterGeminiWiderChat.destroy === 'function') {
+    if (
+      window.BetterGeminiWiderChat &&
+      typeof window.BetterGeminiWiderChat.destroy === "function"
+    ) {
       try {
         window.BetterGeminiWiderChat.destroy();
         featuresInitialized.widerChatWidth = false;
-        log('Wider Chat feature destroyed');
+        log("Wider Chat feature destroyed");
       } catch (error) {
-        logError('Failed to destroy Wider Chat:', error);
+        logError("Failed to destroy Wider Chat:", error);
+      }
+    }
+  }
+
+  function destroyWiderPrompt() {
+    if (!featuresInitialized.widerPromptWidth) {
+      return;
+    }
+
+    if (
+      window.BetterGeminiWiderPrompt &&
+      typeof window.BetterGeminiWiderPrompt.destroy === "function"
+    ) {
+      try {
+        window.BetterGeminiWiderPrompt.destroy();
+        featuresInitialized.widerPromptWidth = false;
+        log("Wider Prompt feature destroyed");
+      } catch (error) {
+        logError("Failed to destroy Wider Prompt:", error);
       }
     }
   }
@@ -231,16 +302,19 @@
       return;
     }
 
-    if (window.BetterGeminiDefaultModel && typeof window.BetterGeminiDefaultModel.init === 'function') {
+    if (
+      window.BetterGeminiDefaultModel &&
+      typeof window.BetterGeminiDefaultModel.init === "function"
+    ) {
       try {
         window.BetterGeminiDefaultModel.init();
         featuresInitialized.defaultModel = true;
-        log('Default Model feature initialized');
+        log("Default Model feature initialized");
       } catch (error) {
-        logError('Failed to initialize Default Model:', error);
+        logError("Failed to initialize Default Model:", error);
       }
     } else {
-      logError('Default Model feature not found on window');
+      logError("Default Model feature not found on window");
     }
   }
 
@@ -252,13 +326,16 @@
       return;
     }
 
-    if (window.BetterGeminiDefaultModel && typeof window.BetterGeminiDefaultModel.destroy === 'function') {
+    if (
+      window.BetterGeminiDefaultModel &&
+      typeof window.BetterGeminiDefaultModel.destroy === "function"
+    ) {
       try {
         window.BetterGeminiDefaultModel.destroy();
         featuresInitialized.defaultModel = false;
-        log('Default Model feature destroyed');
+        log("Default Model feature destroyed");
       } catch (error) {
-        logError('Failed to destroy Default Model:', error);
+        logError("Failed to destroy Default Model:", error);
       }
     }
   }
@@ -270,10 +347,10 @@
    * Loads settings and initializes enabled features
    */
   function initializeFeatures() {
-    log('Starting feature initialization...');
+    log("Starting feature initialization...");
 
     // Load settings (return the promise so callers can await initialization)
-    return loadSettings().then(function(settings) {
+    return loadSettings().then(function (settings) {
       // Initialize features based on settings
       if (settings.exportMarkdown !== false) {
         initExportMarkdown();
@@ -290,12 +367,15 @@
       if (settings.widerChatWidth !== false) {
         initWiderChat();
       }
+      if (settings.widerPromptWidth !== false) {
+        initWiderPrompt();
+      }
 
       if (settings.defaultModel !== false) {
         initDefaultModel();
       }
 
-      log('Feature initialization complete');
+      log("Feature initialization complete");
     });
   }
 
@@ -305,43 +385,82 @@
    * @param {string} areaName - Storage area name
    */
   function handleSettingsChange(changes, areaName) {
-    if (areaName !== 'sync' || !changes[STORAGE_KEY]) {
+    if (areaName !== "sync" || !changes[STORAGE_KEY]) {
       return;
     }
 
     var newSettings = changes[STORAGE_KEY].newValue || DEFAULT_SETTINGS;
-    log('Settings changed:', newSettings);
+    log("Settings changed:", newSettings);
 
     // Handle Export Markdown - can only be enabled (no destroy function)
-    if (newSettings.exportMarkdown !== false && !featuresInitialized.exportMarkdown) {
+    if (
+      newSettings.exportMarkdown !== false &&
+      !featuresInitialized.exportMarkdown
+    ) {
       initExportMarkdown();
     }
 
     // Handle Export Full Chat
-    if (newSettings.exportFullChat !== false && !featuresInitialized.exportFullChat) {
+    if (
+      newSettings.exportFullChat !== false &&
+      !featuresInitialized.exportFullChat
+    ) {
       initExportFullChat();
-    } else if (newSettings.exportFullChat === false && featuresInitialized.exportFullChat) {
+    } else if (
+      newSettings.exportFullChat === false &&
+      featuresInitialized.exportFullChat
+    ) {
       destroyExportFullChat();
     }
 
     // Handle Keyboard Shortcuts
-    if (newSettings.keyboardShortcuts !== false && !featuresInitialized.keyboardShortcuts) {
+    if (
+      newSettings.keyboardShortcuts !== false &&
+      !featuresInitialized.keyboardShortcuts
+    ) {
       initKeyboardShortcuts();
-    } else if (newSettings.keyboardShortcuts === false && featuresInitialized.keyboardShortcuts) {
+    } else if (
+      newSettings.keyboardShortcuts === false &&
+      featuresInitialized.keyboardShortcuts
+    ) {
       destroyKeyboardShortcuts();
     }
 
     // Handle Wider Chat
-    if (newSettings.widerChatWidth !== false && !featuresInitialized.widerChatWidth) {
+    if (
+      newSettings.widerChatWidth !== false &&
+      !featuresInitialized.widerChatWidth
+    ) {
       initWiderChat();
-    } else if (newSettings.widerChatWidth === false && featuresInitialized.widerChatWidth) {
+    } else if (
+      newSettings.widerChatWidth === false &&
+      featuresInitialized.widerChatWidth
+    ) {
       destroyWiderChat();
+    }
+    //handles wider prompt chat
+    if (
+      newSettings.widerPromptWidth !== false &&
+      !featuresInitialized.widerPromptWidth
+    ) {
+      initWiderPrompt();
+    } else if (
+      newSettings.widerPromptWidth === false &&
+      featuresInitialized.widerPromptWidth
+    ) {
+      destroyWiderPrompt();
     }
 
     // Handle Default Model
-    if (newSettings.defaultModel !== false && !featuresInitialized.defaultModel) {
+    if (
+      newSettings.defaultModel !== false &&
+      !featuresInitialized.defaultModel
+    ) {
       initDefaultModel();
-    } else if (newSettings.defaultModel === false && featuresInitialized.defaultModel) {
+    } else if (
+      newSettings.defaultModel === false &&
+      featuresInitialized.defaultModel
+    ) {
       destroyDefaultModel();
     }
   }
@@ -349,7 +468,7 @@
   // ========== BROWSER INITIALIZATION ==========
 
   if (IS_BROWSER_ENV && !IS_TEST_ENV) {
-    log('Feature loader script loaded');
+    log("Feature loader script loaded");
 
     // Listen for settings changes
     if (chrome.storage && chrome.storage.onChanged) {
@@ -363,8 +482,8 @@
       setTimeout(initializeFeatures, 100);
     }
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', startInitialization);
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", startInitialization);
     } else {
       startInitialization();
     }
@@ -381,25 +500,29 @@
       initExportFullChat: initExportFullChat,
       initKeyboardShortcuts: initKeyboardShortcuts,
       initWiderChat: initWiderChat,
+      initWiderPrompt: initWiderPrompt,
       initDefaultModel: initDefaultModel,
       destroyExportFullChat: destroyExportFullChat,
       destroyKeyboardShortcuts: destroyKeyboardShortcuts,
       destroyWiderChat: destroyWiderChat,
+      destroyWiderPrompt: destroyWiderPrompt,
       destroyDefaultModel: destroyDefaultModel,
       DEFAULT_SETTINGS: DEFAULT_SETTINGS,
       STORAGE_KEY: STORAGE_KEY,
-      getFeaturesInitialized: function() { return Object.assign({}, featuresInitialized); },
+      getFeaturesInitialized: function () {
+        return Object.assign({}, featuresInitialized);
+      },
       // Reset function for testing - resets internal state
-      _resetForTesting: function() {
+      _resetForTesting: function () {
         featuresInitialized = {
           exportMarkdown: false,
           exportFullChat: false,
           keyboardShortcuts: false,
           widerChatWidth: false,
+          widerPromptWidth: false,
           defaultModel: false,
         };
       },
     };
   }
-
 })();

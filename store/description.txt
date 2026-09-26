@@ -1,4 +1,4 @@
-Better Gemini gives Google Gemini the power-user upgrades it's missing — a wider chat layout, address-bar quick launch, one-click exports, and 40+ keyboard shortcuts. Everything runs locally in your browser. No accounts, no tracking, nothing leaves your machine.
+Better Gemini Fork gives Google Gemini the power-user upgrades it's missing — a wider chat layout, address-bar quick launch, one-click exports, and 40+ keyboard shortcuts. Everything runs locally in your browser. No accounts, no tracking, nothing leaves your machine.
 
 Features
 - Wide chat layout — expands the conversation to about 98% of the window so you stop reading Gemini through a narrow column.
@@ -11,10 +11,10 @@ Features
 Every feature is a toggle — turn on only what you want from the popup or the options page.
 
 Privacy first
-Better Gemini runs entirely on your machine and only on gemini.google.com. There is no analytics, no tracking, and no third-party data collection — the add-on declares "no" data collection to Firefox. It uses your own Gemini session and never sends your prompts or chats anywhere.
+Better Gemini Fork runs entirely on your machine and only on gemini.google.com. There is no analytics, no tracking, and no third-party data collection — the add-on declares "no" data collection to Firefox. It uses your own Gemini session and never sends your prompts or chats anywhere.
 
 Who it's for
 Anyone who lives in Gemini and wants a faster, wider, keyboard-driven experience with easy exporting — researchers, writers, developers, and power users.
 
 Source code and details:
-https://github.com/balakumardev/better-gemini
+https://github.com/Jayant-Gade/better-gemini

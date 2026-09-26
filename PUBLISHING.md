@@ -1,10 +1,10 @@
-# Better Gemini - Chrome Web Store Publishing Guide
+# Better Gemini Fork - Chrome Web Store Publishing Guide
 
 ## Store Listing Details
 
 ### Extension Name
 ```
-Better Gemini
+Better Gemini (Community Fork)
 ```
 
 ### Short Description (132 characters max)
@@ -14,7 +14,7 @@ Supercharge Google Gemini with wider chat, keyboard shortcuts, Markdown export, 
 
 ### Detailed Description (Plain text, no Markdown/HTML)
 ```
-Better Gemini transforms your Google Gemini experience with powerful features that serious AI users have been asking for.
+Better Gemini Fork transforms your Google Gemini experience with powerful features that serious AI users have been asking for.
 
 FEATURES:
 
@@ -52,7 +52,7 @@ PERMISSIONS EXPLAINED:
 
 Works exclusively on gemini.google.com - this extension only activates on Google Gemini.
 
-Built by Bala Kumar | balakumar.dev
+Fork maintained by Jayant Gade | Originally created by Bala Kumar (balakumar.dev)
 ```
 
 ### Category
@@ -132,7 +132,7 @@ zip -r better-gemini-v1.0.0.zip . \
 1. Click "New Item"
 2. Upload the ZIP file created in step 1
 3. Fill in the store listing:
-   - **Name**: Better Gemini
+   - **Name**: Better Gemini (Community Fork)
    - **Summary**: Use the short description above
    - **Description**: Use the detailed description above
    - **Category**: Productivity

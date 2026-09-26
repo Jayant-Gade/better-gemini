@@ -23,6 +23,7 @@
     exportFullChat: true,
     keyboardShortcuts: true,
     widerChatWidth: true,
+    widerPromptWidth: true,
     defaultModel: true,
   };
 
@@ -51,6 +52,7 @@
     exportFullChat: false,
     keyboardShortcuts: false,
     widerChatWidth: false,
+    widerPromptWidth: false,
     defaultModel: false,
   };
 
@@ -223,6 +225,41 @@
     }
   }
 
+  /* wider prompt */
+  function initWiderPrompt() {
+    if (featuresInitialized.widerPromptWidth) {
+      return;
+    }
+
+    if (window.BetterGeminiWiderPrompt && typeof window.BetterGeminiWiderPrompt.init === 'function') {
+      try {
+        window.BetterGeminiWiderPrompt.init();
+        featuresInitialized.widerPromptWidth = true;
+        log('Wider Prompt feature initialized');
+      } catch (error) {
+        logError('Failed to initialize Wider Prompt:', error);
+      }
+    } else {
+      logError('Wider Prompt feature not found on window');
+    }
+  }
+
+  function destroyWiderPrompt() {
+    if (!featuresInitialized.widerPromptWidth) {
+      return;
+    }
+
+    if (window.BetterGeminiWiderPrompt && typeof window.BetterGeminiWiderPrompt.destroy === 'function') {
+      try {
+        window.BetterGeminiWiderPrompt.destroy();
+        featuresInitialized.widerPromptWidth = false;
+        log('Wider Prompt feature destroyed');
+      } catch (error) {
+        logError('Failed to destroy Wider Prompt:', error);
+      }
+    }
+  }
+
   /**
    * Initializes the Default Model feature
    */
@@ -291,6 +328,10 @@
         initWiderChat();
       }
 
+      if (settings.widerPromptWidth !== false) {
+        initWiderPrompt();
+      }
+
       if (settings.defaultModel !== false) {
         initDefaultModel();
       }
@@ -338,6 +379,13 @@
       destroyWiderChat();
     }
 
+    // Handles wider prompt chat
+    if (newSettings.widerPromptWidth !== false && !featuresInitialized.widerPromptWidth) {
+      initWiderPrompt();
+    } else if (newSettings.widerPromptWidth === false && featuresInitialized.widerPromptWidth) {
+      destroyWiderPrompt();
+    }
+
     // Handle Default Model
     if (newSettings.defaultModel !== false && !featuresInitialized.defaultModel) {
       initDefaultModel();
@@ -381,10 +429,12 @@
       initExportFullChat: initExportFullChat,
       initKeyboardShortcuts: initKeyboardShortcuts,
       initWiderChat: initWiderChat,
+      initWiderPrompt: initWiderPrompt,
       initDefaultModel: initDefaultModel,
       destroyExportFullChat: destroyExportFullChat,
       destroyKeyboardShortcuts: destroyKeyboardShortcuts,
       destroyWiderChat: destroyWiderChat,
+      destroyWiderPrompt: destroyWiderPrompt,
       destroyDefaultModel: destroyDefaultModel,
       DEFAULT_SETTINGS: DEFAULT_SETTINGS,
       STORAGE_KEY: STORAGE_KEY,
@@ -396,6 +446,7 @@
           exportFullChat: false,
           keyboardShortcuts: false,
           widerChatWidth: false,
+          widerPromptWidth: false,
           defaultModel: false,
         };
       },
