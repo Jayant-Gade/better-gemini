@@ -25,7 +25,7 @@
 
   const WIDER_PROMPT_CSS = `
 /* Selectors for prompt containers, input areas, and user query boxes */
-.prompt-container,.file-preview-container,.user-query-container,user-query-content,
+.prompt-container,.user-query-container,user-query-content,
 textarea {
   max-width: 98% !important;
   width: max-content !important;
