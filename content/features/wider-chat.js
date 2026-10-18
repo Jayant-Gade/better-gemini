@@ -193,16 +193,8 @@ table-block {
    * Initializes the wider chat feature
    */
   function init() {
-    if (isInitialized) {
-      return;
-    }
-
+    if (isInitialized) return;
     styleElement = injectStyles();
-
-    if (typeof MutationObserver !== "undefined") {
-      observer = setupObserver();
-    }
-
     isInitialized = true;
   }
 
@@ -210,18 +202,9 @@ table-block {
    * Destroys the wider chat feature
    */
   function destroy() {
-    if (!isInitialized) {
-      return;
-    }
-
-    if (observer) {
-      observer.disconnect();
-      observer = null;
-    }
-
+    if (!isInitialized) return;
     removeStyles();
     styleElement = null;
-
     isInitialized = false;
   }
 
