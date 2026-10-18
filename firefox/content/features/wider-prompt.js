@@ -142,40 +142,21 @@ textarea {
   /**
    * Initializes the wider prompt feature
    * - Injects CSS styles
-   * - Sets up MutationObserver for dynamic content
    */
   function init() {
-    if (isInitialized) {
-      return;
-    }
-
+    if (isInitialized) return;
     styleElement = injectStyles();
-
-    if (typeof MutationObserver !== "undefined") {
-      observer = setupObserver();
-    }
-
     isInitialized = true;
   }
 
   /**
    * Destroys the wider prompt feature
    * - Removes injected styles
-   * - Disconnects MutationObserver
    */
   function destroy() {
-    if (!isInitialized) {
-      return;
-    }
-
-    if (observer) {
-      observer.disconnect();
-      observer = null;
-    }
-
+    if (!isInitialized) return;
     removeStyles();
     styleElement = null;
-
     isInitialized = false;
   }
 
