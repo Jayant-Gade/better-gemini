@@ -51,13 +51,24 @@
 hr.better-gemini-divider {
   border: none !important;
   height: 1px !important;
+  min-height: 1px !important;
+  max-height: 1px !important;
+  padding: 0 !important;
+  line-height: 0 !important;
   background-color: var(--better-gemini-divider-color, ${DEFAULT_DIVIDER_COLOR}) !important;
   color: var(--better-gemini-divider-color, ${DEFAULT_DIVIDER_COLOR}) !important;
-  margin: 16px 0 !important;
   width: 100% !important;
   display: block !important;
   box-sizing: border-box !important;
   opacity: 0.85 !important;
+}
+
+hr.better-gemini-divider-before {
+  margin: 0 0 10px 0 !important;
+}
+
+hr.better-gemini-divider-after {
+  margin: 0 !important;
 }
 `;
     }
@@ -130,9 +141,14 @@ ${PROMPT_BUBBLE_SELECTORS} {
     hr.setAttribute("data-better-gemini-divider", position);
     hr.style.setProperty("border", "none", "important");
     hr.style.setProperty("height", "1px", "important");
+    hr.style.setProperty("min-height", "1px", "important");
+    hr.style.setProperty("max-height", "1px", "important");
+    const margin = position === "after" ? "0" : "0 0 10px 0";
+    hr.style.setProperty("margin", margin, "important");
+    hr.style.setProperty("padding", "0", "important");
+    hr.style.setProperty("line-height", "0", "important");
     hr.style.setProperty("background-color", dividerColor, "important");
     hr.style.setProperty("color", dividerColor, "important");
-    hr.style.setProperty("margin", "16px 0", "important");
     hr.style.setProperty("width", "100%", "important");
     hr.style.setProperty("display", "block", "important");
     hr.style.setProperty("box-sizing", "border-box", "important");

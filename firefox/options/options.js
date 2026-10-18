@@ -127,13 +127,6 @@ async function loadSettings() {
     elements.promptBubbleColor.value = settings.promptBubbleColor || "#1e1f20";
     elements.promptBubbleColorEnabled.checked =
       settings.promptBubbleColorEnabled !== false;
-    elements.customizeChat.checked = settings.customizeChat !== false;
-    elements.dividerColor.value = settings.dividerColor || "#3c4043";
-    elements.dividerColorEnabled.checked =
-      settings.dividerColorEnabled !== false;
-    elements.promptBubbleColor.value = settings.promptBubbleColor || "#1e1f20";
-    elements.promptBubbleColorEnabled.checked =
-      settings.promptBubbleColorEnabled !== false;
     elements.defaultModel.checked = settings.defaultModel !== false;
 
     // Apply selected model and thinking level
@@ -145,7 +138,6 @@ async function loadSettings() {
 
     // Update model selector visibility
     updateModelSelectorVisibility();
-    updateThemeSettingsVisibility();
     updateThemeSettingsVisibility();
 
     console.log(
@@ -169,17 +161,11 @@ async function loadSettings() {
     elements.dividerColorEnabled.checked = true;
     elements.promptBubbleColor.value = "#1e1f20";
     elements.promptBubbleColorEnabled.checked = true;
-    elements.customizeChat.checked = true;
-    elements.dividerColor.value = "#3c4043";
-    elements.dividerColorEnabled.checked = true;
-    elements.promptBubbleColor.value = "#1e1f20";
-    elements.promptBubbleColorEnabled.checked = true;
     elements.defaultModel.checked = true;
     elements.selectedModel.value = DEFAULT_MODEL;
     elements.selectedEffort.value = DEFAULT_EFFORT;
     isThemeSubOptionsCollapsed = false;
     updateModelSelectorVisibility();
-    updateThemeSettingsVisibility();
     updateThemeSettingsVisibility();
   }
 }
