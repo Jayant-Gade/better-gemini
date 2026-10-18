@@ -126,16 +126,19 @@
 
           <div class="setting-item collapsable-setting" id="customizeChatRow">
             <div class="setting-info" id="customizeChatHeader">
-              <span class="setting-label">Customized Theme</span>
+              <div class="setting-label-row">
+                <span class="setting-label">Customized Theme</span>
+                <span class="badge-beta">Beta</span>
+              </div>
               <p class="setting-description">
                 Improve chat's visibility by changing chat's element colors.
               </p>
             </div>
             <div class="setting-controls">
               <span
-                class="collapse-indicator expanded"
+                class="collapse-indicator collapsed"
                 id="themeCollapseIcon"
-                title="Collapse or expand options"
+                title="Expand options"
                 role="button"
                 tabindex="0"
               >
@@ -154,13 +157,13 @@
                 </svg>
               </span>
               <label class="toggle">
-                <input type="checkbox" id="customizeChat" checked />
+                <input type="checkbox" id="customizeChat" />
                 <span class="toggle-slider"></span>
               </label>
             </div>
           </div>
 
-          <div class="setting-item sub-setting" id="dividerColorContainer">
+          <div class="setting-item sub-setting" id="dividerColorContainer" style="display: none;">
             <div class="setting-info">
               <label for="dividerColor" class="setting-label">Divider Color</label>
               <p class="setting-description">
@@ -184,7 +187,7 @@
             </div>
           </div>
 
-          <div class="setting-item sub-setting" id="promptBubbleColorContainer">
+          <div class="setting-item sub-setting" id="promptBubbleColorContainer" style="display: none;">
             <div class="setting-info">
               <label for="promptBubbleColor" class="setting-label">Prompt Bubble Color</label>
               <p class="setting-description">
@@ -216,6 +219,7 @@
             href="customize-options.html"
             class="setting-item sub-setting setting-item-clickable"
             id="moreCustomizationContainer"
+            style="display: none;"
           >
             <div class="setting-info">
               <span class="setting-label">More Customization Options</span>

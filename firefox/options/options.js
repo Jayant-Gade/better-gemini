@@ -16,7 +16,7 @@ const DEFAULT_SETTINGS = {
   keyboardShortcuts: true,
   widerChatWidth: true,
   widerPromptWidth: true,
-  customizeChat: true,
+  customizeChat: false,
   dividerColor: "#3c4043",
   dividerColorEnabled: true,
   promptBubbleColor: "#1e1f20",
@@ -120,7 +120,7 @@ async function loadSettings() {
     elements.keyboardShortcuts.checked = settings.keyboardShortcuts !== false;
     elements.widerChatWidth.checked = settings.widerChatWidth !== false;
     elements.widerPromptWidth.checked = settings.widerPromptWidth !== false;
-    elements.customizeChat.checked = settings.customizeChat !== false;
+    elements.customizeChat.checked = settings.customizeChat === true;
     elements.dividerColor.value = settings.dividerColor || "#3c4043";
     elements.dividerColorEnabled.checked =
       settings.dividerColorEnabled !== false;
@@ -156,7 +156,7 @@ async function loadSettings() {
     elements.keyboardShortcuts.checked = true;
     elements.widerChatWidth.checked = true;
     elements.widerPromptWidth.checked = true;
-    elements.customizeChat.checked = true;
+    elements.customizeChat.checked = false;
     elements.dividerColor.value = "#3c4043";
     elements.dividerColorEnabled.checked = true;
     elements.promptBubbleColor.value = "#1e1f20";
@@ -164,7 +164,7 @@ async function loadSettings() {
     elements.defaultModel.checked = true;
     elements.selectedModel.value = DEFAULT_MODEL;
     elements.selectedEffort.value = DEFAULT_EFFORT;
-    isThemeSubOptionsCollapsed = false;
+    isThemeSubOptionsCollapsed = true;
     updateModelSelectorVisibility();
     updateThemeSettingsVisibility();
   }
@@ -179,7 +179,7 @@ function updateModelSelectorVisibility() {
   elements.effortSelectorContainer.style.display = display;
 }
 
-let isThemeSubOptionsCollapsed = false;
+let isThemeSubOptionsCollapsed = true;
 
 /**
  * Toggles collapse/expand of the theme sub-options list

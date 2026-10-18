@@ -15,7 +15,7 @@ const DEFAULT_SETTINGS = {
   keyboardShortcuts: true,
   widerChatWidth: true,
   widerPromptWidth: true,
-  customizeChat: true,
+  customizeChat: false,
   defaultModel: true,
 };
 
@@ -64,7 +64,7 @@ async function loadSettings() {
     elements.keyboardShortcuts.checked = settings.keyboardShortcuts !== false;
     elements.widerChatWidth.checked = settings.widerChatWidth !== false;
     elements.widerPromptWidth.checked = settings.widerPromptWidth !== false;
-    elements.customizeChat.checked = settings.customizeChat !== false;
+    elements.customizeChat.checked = settings.customizeChat === true;
     elements.defaultModel.checked = settings.defaultModel !== false;
 
     console.log("[Better Gemini Popup] Settings loaded:", settings);
@@ -76,7 +76,7 @@ async function loadSettings() {
     elements.keyboardShortcuts.checked = true;
     elements.widerPromptWidth.checked = true;
     elements.widerChatWidth.checked = true;
-    elements.customizeChat.checked = true;
+    elements.customizeChat.checked = false;
     elements.defaultModel.checked = true;
   }
 }

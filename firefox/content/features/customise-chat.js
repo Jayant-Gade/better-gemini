@@ -27,7 +27,7 @@
 
   // ========== STATE ==========
   let isInitialized = false;
-  let isEnabled = true; // Main feature toggle: customizeChat
+  let isEnabled = false; // Main feature toggle: customizeChat (disabled by default)
   let isDividerEnabled = true; // Sub toggle: dividerColorEnabled
   let isPromptBubbleEnabled = true; // Sub toggle: promptBubbleColorEnabled
   let dividerColor = DEFAULT_DIVIDER_COLOR;
@@ -229,7 +229,7 @@ ${PROMPT_BUBBLE_SELECTORS} {
   function updateSettings(settings) {
     if (!settings) return;
 
-    isEnabled = settings.customizeChat !== false;
+    isEnabled = settings.customizeChat === true;
     isDividerEnabled = settings.dividerColorEnabled !== false;
     isPromptBubbleEnabled = settings.promptBubbleColorEnabled !== false;
 

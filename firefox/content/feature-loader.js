@@ -28,7 +28,7 @@
     keyboardShortcuts: true,
     widerChatWidth: true,
     widerPromptWidth: true,
-    customizeChat: true,
+    customizeChat: false,
     defaultModel: true,
   };
 
@@ -419,7 +419,7 @@
         initWiderPrompt();
       }
 
-      if (settings.customizeChat !== false) {
+      if (settings.customizeChat === true) {
         initCustomiseChat();
       }
 
@@ -505,12 +505,12 @@
 
     // Handle Customise Chat
     if (
-      newSettings.customizeChat !== false &&
+      newSettings.customizeChat === true &&
       !featuresInitialized.customizeChat
     ) {
       initCustomiseChat();
     } else if (
-      newSettings.customizeChat === false &&
+      !newSettings.customizeChat &&
       featuresInitialized.customizeChat
     ) {
       destroyCustomiseChat();
