@@ -3,15 +3,22 @@
   "name": "Better Gemini (Community Fork): Wide UI & Export",
   "version": "1.1.3",
   "description": "Wide 98% chat layout, quick launch (type 'gem'), export to Markdown, 40+ keyboard shortcuts, default model picker.",
-  "permissions": ["activeTab", "storage"],
-  "host_permissions": ["https://gemini.google.com/*"],
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://gemini.google.com/*"
+  ],
   "background": {
     "service_worker": "background.js",
     "type": "module"
   },
   "content_scripts": [
     {
-      "matches": ["https://gemini.google.com/*"],
+      "matches": [
+        "https://gemini.google.com/*"
+      ],
       "js": [
         "content/injector.js",
         "content/features/wider-chat.js",
