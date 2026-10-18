@@ -28,6 +28,7 @@
         "content/features/export-markdown.js",
         "content/features/export-full-chat.js",
         "content/features/default-model.js",
+        "content/features/customise-chat.js",
         "content/feature-loader.js"
       ],
       "run_at": "document_idle"

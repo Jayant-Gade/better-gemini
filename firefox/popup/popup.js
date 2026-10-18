@@ -15,6 +15,7 @@ const DEFAULT_SETTINGS = {
   keyboardShortcuts: true,
   widerChatWidth: true,
   widerPromptWidth: true,
+  customizeChat: true,
   defaultModel: true,
 };
 
@@ -25,6 +26,7 @@ const elements = {
   keyboardShortcuts: null,
   widerChatWidth: null,
   widerPromptWidth: null,
+  customizeChat: null,
   defaultModel: null,
   openSettings: null,
   saveIndicator: null,
@@ -42,6 +44,7 @@ function initializeElements() {
   elements.keyboardShortcuts = document.getElementById("keyboardShortcuts");
   elements.widerChatWidth = document.getElementById("widerChatWidth");
   elements.widerPromptWidth = document.getElementById("widerPromptWidth");
+  elements.customizeChat = document.getElementById("customizeChat");
   elements.defaultModel = document.getElementById("defaultModel");
   elements.openSettings = document.getElementById("openSettings");
   elements.saveIndicator = document.getElementById("saveIndicator");
@@ -61,6 +64,7 @@ async function loadSettings() {
     elements.keyboardShortcuts.checked = settings.keyboardShortcuts !== false;
     elements.widerChatWidth.checked = settings.widerChatWidth !== false;
     elements.widerPromptWidth.checked = settings.widerPromptWidth !== false;
+    elements.customizeChat.checked = settings.customizeChat !== false;
     elements.defaultModel.checked = settings.defaultModel !== false;
 
     console.log("[Better Gemini Popup] Settings loaded:", settings);
@@ -72,6 +76,7 @@ async function loadSettings() {
     elements.keyboardShortcuts.checked = true;
     elements.widerPromptWidth.checked = true;
     elements.widerChatWidth.checked = true;
+    elements.customizeChat.checked = true;
     elements.defaultModel.checked = true;
   }
 }
@@ -80,16 +85,20 @@ async function loadSettings() {
  * Save settings to chrome.storage.sync
  */
 async function saveSettings() {
-  const settings = {
-    exportMarkdown: elements.exportMarkdown.checked,
-    exportFullChat: elements.exportFullChat.checked,
-    keyboardShortcuts: elements.keyboardShortcuts.checked,
-    widerChatWidth: elements.widerChatWidth.checked,
-    widerPromptWidth: elements.widerPromptWidth.checked,
-    defaultModel: elements.defaultModel.checked,
-  };
-
   try {
+    const result = await chrome.storage.sync.get([STORAGE_KEY]);
+    const currentSettings = result[STORAGE_KEY] || {};
+    const settings = {
+      ...currentSettings,
+      exportMarkdown: elements.exportMarkdown.checked,
+      exportFullChat: elements.exportFullChat.checked,
+      keyboardShortcuts: elements.keyboardShortcuts.checked,
+      widerChatWidth: elements.widerChatWidth.checked,
+      widerPromptWidth: elements.widerPromptWidth.checked,
+      customizeChat: elements.customizeChat.checked,
+      defaultModel: elements.defaultModel.checked,
+    };
+
     await chrome.storage.sync.set({ [STORAGE_KEY]: settings });
     console.log("[Better Gemini Popup] Settings saved:", settings);
     showSaveIndicator();
@@ -135,6 +144,7 @@ function attachEventListeners() {
     elements.keyboardShortcuts,
     elements.widerChatWidth,
     elements.widerPromptWidth,
+    elements.customizeChat,
     elements.defaultModel,
   ];
 
