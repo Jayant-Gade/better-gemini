@@ -28,6 +28,7 @@
     keyboardShortcuts: true,
     widerChatWidth: true,
     widerPromptWidth: true,
+    customizeChat: true,
     defaultModel: true,
   };
 
@@ -57,6 +58,7 @@
     keyboardShortcuts: false,
     widerChatWidth: false,
     widerPromptWidth: false,
+    customizeChat: false,
     defaultModel: false,
   };
 
@@ -340,6 +342,52 @@
     }
   }
 
+  /**
+   * Initializes the Customise Chat feature
+   */
+  function initCustomiseChat() {
+    if (featuresInitialized.customizeChat) {
+      return;
+    }
+
+    if (
+      window.BetterGeminiCustomiseChat &&
+      typeof window.BetterGeminiCustomiseChat.init === "function"
+    ) {
+      try {
+        window.BetterGeminiCustomiseChat.init();
+        featuresInitialized.customizeChat = true;
+        log("Customise Chat feature initialized");
+      } catch (error) {
+        logError("Failed to initialize Customise Chat:", error);
+      }
+    } else {
+      logError("Customise Chat feature not found on window");
+    }
+  }
+
+  /**
+   * Destroys (disables) the Customise Chat feature
+   */
+  function destroyCustomiseChat() {
+    if (!featuresInitialized.customizeChat) {
+      return;
+    }
+
+    if (
+      window.BetterGeminiCustomiseChat &&
+      typeof window.BetterGeminiCustomiseChat.destroy === "function"
+    ) {
+      try {
+        window.BetterGeminiCustomiseChat.destroy();
+        featuresInitialized.customizeChat = false;
+        log("Customise Chat feature destroyed");
+      } catch (error) {
+        logError("Failed to destroy Customise Chat:", error);
+      }
+    }
+  }
+
   // ========== MAIN INITIALIZATION ==========
 
   /**
@@ -369,6 +417,10 @@
       }
       if (settings.widerPromptWidth !== false) {
         initWiderPrompt();
+      }
+
+      if (settings.customizeChat !== false) {
+        initCustomiseChat();
       }
 
       if (settings.defaultModel !== false) {
@@ -449,6 +501,19 @@
       featuresInitialized.widerPromptWidth
     ) {
       destroyWiderPrompt();
+    }
+
+    // Handle Customise Chat
+    if (
+      newSettings.customizeChat !== false &&
+      !featuresInitialized.customizeChat
+    ) {
+      initCustomiseChat();
+    } else if (
+      newSettings.customizeChat === false &&
+      featuresInitialized.customizeChat
+    ) {
+      destroyCustomiseChat();
     }
 
     // Handle Default Model

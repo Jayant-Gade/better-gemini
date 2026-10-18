@@ -16,6 +16,13 @@ const DEFAULT_SETTINGS = {
   keyboardShortcuts: true,
   widerChatWidth: true,
   widerPromptWidth: true,
+  customizeChat: true,
+  dividerColor: "#3c4043",
+  dividerColorEnabled: true,
+  promptBubbleColor: "#1e1f20",
+  promptBubbleColorEnabled: true,
+  responseAreaColor: "#131314",
+  responseAreaColorEnabled: true,
   defaultModel: true,
 };
 
@@ -30,6 +37,16 @@ const elements = {
   keyboardShortcuts: null,
   widerChatWidth: null,
   widerPromptWidth: null,
+  customizeChat: null,
+  customizeChatHeader: null,
+  themeCollapseIcon: null,
+  dividerColorContainer: null,
+  dividerColor: null,
+  dividerColorEnabled: null,
+  promptBubbleColorContainer: null,
+  promptBubbleColor: null,
+  promptBubbleColorEnabled: null,
+  moreCustomizationContainer: null,
   defaultModel: null,
   selectedModel: null,
   modelSelectorContainer: null,
@@ -48,6 +65,27 @@ function initializeElements() {
   elements.keyboardShortcuts = document.getElementById("keyboardShortcuts");
   elements.widerChatWidth = document.getElementById("widerChatWidth");
   elements.widerPromptWidth = document.getElementById("widerPromptWidth");
+  elements.customizeChat = document.getElementById("customizeChat");
+  elements.customizeChatRow = document.getElementById("customizeChatRow");
+  elements.customizeChatHeader = document.getElementById("customizeChatHeader");
+  elements.themeCollapseIcon = document.getElementById("themeCollapseIcon");
+  elements.dividerColorContainer = document.getElementById(
+    "dividerColorContainer",
+  );
+  elements.dividerColor = document.getElementById("dividerColor");
+  elements.dividerColorEnabled = document.getElementById(
+    "dividerColorEnabled",
+  );
+  elements.promptBubbleColorContainer = document.getElementById(
+    "promptBubbleColorContainer",
+  );
+  elements.promptBubbleColor = document.getElementById("promptBubbleColor");
+  elements.promptBubbleColorEnabled = document.getElementById(
+    "promptBubbleColorEnabled",
+  );
+  elements.moreCustomizationContainer = document.getElementById(
+    "moreCustomizationContainer",
+  );
   elements.defaultModel = document.getElementById("defaultModel");
   elements.selectedModel = document.getElementById("selectedModel");
   elements.modelSelectorContainer = document.getElementById(
@@ -82,14 +120,25 @@ async function loadSettings() {
     elements.keyboardShortcuts.checked = settings.keyboardShortcuts !== false;
     elements.widerChatWidth.checked = settings.widerChatWidth !== false;
     elements.widerPromptWidth.checked = settings.widerPromptWidth !== false;
+    elements.customizeChat.checked = settings.customizeChat !== false;
+    elements.dividerColor.value = settings.dividerColor || "#3c4043";
+    elements.dividerColorEnabled.checked =
+      settings.dividerColorEnabled !== false;
+    elements.promptBubbleColor.value = settings.promptBubbleColor || "#1e1f20";
+    elements.promptBubbleColorEnabled.checked =
+      settings.promptBubbleColorEnabled !== false;
     elements.defaultModel.checked = settings.defaultModel !== false;
 
     // Apply selected model and thinking level
     elements.selectedModel.value = selectedModel;
     elements.selectedEffort.value = selectedEffort;
 
+    // Initialize collapse state based on saved customizeChat toggle
+    isThemeSubOptionsCollapsed = !elements.customizeChat.checked;
+
     // Update model selector visibility
     updateModelSelectorVisibility();
+    updateThemeSettingsVisibility();
 
     console.log(
       "[Better Gemini] Settings loaded:",
@@ -107,10 +156,17 @@ async function loadSettings() {
     elements.keyboardShortcuts.checked = true;
     elements.widerChatWidth.checked = true;
     elements.widerPromptWidth.checked = true;
+    elements.customizeChat.checked = true;
+    elements.dividerColor.value = "#3c4043";
+    elements.dividerColorEnabled.checked = true;
+    elements.promptBubbleColor.value = "#1e1f20";
+    elements.promptBubbleColorEnabled.checked = true;
     elements.defaultModel.checked = true;
     elements.selectedModel.value = DEFAULT_MODEL;
     elements.selectedEffort.value = DEFAULT_EFFORT;
+    isThemeSubOptionsCollapsed = false;
     updateModelSelectorVisibility();
+    updateThemeSettingsVisibility();
   }
 }
 
@@ -123,23 +179,82 @@ function updateModelSelectorVisibility() {
   elements.effortSelectorContainer.style.display = display;
 }
 
+let isThemeSubOptionsCollapsed = false;
+
+/**
+ * Toggles collapse/expand of the theme sub-options list
+ */
+function toggleThemeCollapse(event) {
+  // If the user clicked directly on the toggle switch, do not toggle collapse
+  if (event && event.target && event.target.closest(".toggle")) {
+    return;
+  }
+  isThemeSubOptionsCollapsed = !isThemeSubOptionsCollapsed;
+  updateThemeSettingsVisibility();
+}
+
+/**
+ * Updates the visibility of the theme sub-settings based on collapsed/expanded state
+ */
+function updateThemeSettingsVisibility() {
+  const isVisible = !isThemeSubOptionsCollapsed;
+  const display = isVisible ? "flex" : "none";
+
+  if (elements.dividerColorContainer) {
+    elements.dividerColorContainer.style.display = display;
+  }
+  if (elements.promptBubbleColorContainer) {
+    elements.promptBubbleColorContainer.style.display = display;
+  }
+  if (elements.moreCustomizationContainer) {
+    elements.moreCustomizationContainer.style.display = display;
+  }
+
+  if (elements.themeCollapseIcon) {
+    if (isVisible) {
+      elements.themeCollapseIcon.classList.add("expanded");
+      elements.themeCollapseIcon.classList.remove("collapsed");
+      elements.themeCollapseIcon.title = "Collapse options";
+    } else {
+      elements.themeCollapseIcon.classList.remove("expanded");
+      elements.themeCollapseIcon.classList.add("collapsed");
+      elements.themeCollapseIcon.title = "Expand options";
+    }
+  }
+}
+
 /**
  * Save settings to chrome.storage.sync
  */
 async function saveSettings() {
-  const settings = {
-    exportMarkdown: elements.exportMarkdown.checked,
-    exportFullChat: elements.exportFullChat.checked,
-    keyboardShortcuts: elements.keyboardShortcuts.checked,
-    widerChatWidth: elements.widerChatWidth.checked,
-    widerPromptWidth: elements.widerPromptWidth.checked,
-    defaultModel: elements.defaultModel.checked,
-  };
-
-  const selectedModel = elements.selectedModel.value;
-  const selectedEffort = elements.selectedEffort.value;
-
   try {
+    const result = await chrome.storage.sync.get([STORAGE_KEY]);
+    const currentSettings = result[STORAGE_KEY] || {};
+
+    const settings = {
+      ...currentSettings,
+      exportMarkdown: elements.exportMarkdown.checked,
+      exportFullChat: elements.exportFullChat.checked,
+      keyboardShortcuts: elements.keyboardShortcuts.checked,
+      widerChatWidth: elements.widerChatWidth.checked,
+      widerPromptWidth: elements.widerPromptWidth.checked,
+      customizeChat: elements.customizeChat.checked,
+      dividerColor: elements.dividerColor ? elements.dividerColor.value : "#3c4043",
+      dividerColorEnabled: elements.dividerColorEnabled
+        ? elements.dividerColorEnabled.checked
+        : true,
+      promptBubbleColor: elements.promptBubbleColor
+        ? elements.promptBubbleColor.value
+        : "#1e1f20",
+      promptBubbleColorEnabled: elements.promptBubbleColorEnabled
+        ? elements.promptBubbleColorEnabled.checked
+        : true,
+      defaultModel: elements.defaultModel.checked,
+    };
+
+    const selectedModel = elements.selectedModel.value;
+    const selectedEffort = elements.selectedEffort.value;
+
     await chrome.storage.sync.set({
       [STORAGE_KEY]: settings,
       [MODEL_STORAGE_KEY]: selectedModel,
@@ -203,6 +318,25 @@ function initialize() {
     "change",
     updateModelSelectorVisibility,
   );
+
+  // Add event listener for customizeChat toggle to auto-expand when turned on or collapse when off
+  elements.customizeChat.addEventListener("change", () => {
+    isThemeSubOptionsCollapsed = !elements.customizeChat.checked;
+    updateThemeSettingsVisibility();
+  });
+
+  // Add click handler on the main option row to collapse/uncollapse sub-options without toggling the setting
+  if (elements.customizeChatRow) {
+    elements.customizeChatRow.addEventListener("click", toggleThemeCollapse);
+  }
+  if (elements.themeCollapseIcon) {
+    elements.themeCollapseIcon.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        toggleThemeCollapse();
+      }
+    });
+  }
 }
 
 // Initialize when DOM is ready

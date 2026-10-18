@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Better Gemini - Theme Customization</title>
+  <link rel="stylesheet" href="options.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="background-glow"></div>
+
+  <div class="container">
+    <div class="back-nav">
+      <a href="options.html" class="back-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        <span>Back to Options</span>
+      </a>
+    </div>
+
+    <header>
+      <div class="logo-section">
+        <div class="logo-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color: #8b5cf6" />
+                <stop offset="100%" style="stop-color: #6366f1" />
+              </linearGradient>
+            </defs>
+            <rect width="32" height="32" rx="8" fill="url(#logoGradient)" />
+            <path d="M10 16L14 20L22 12" stroke="white" stroke-width="2.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </div>
+        <div class="logo-text">
+          <h1>Theme Customization</h1>
+          <p class="subtitle">Customize chat bubbles, dividers, and background colors</p>
+        </div>
+      </div>
+      <p class="creator-badge">
+        forked by
+        <a href="https://github.com/Jayant-Gade" target="_blank" rel="noopener">Jayant Gade</a>
+      </p>
+    </header>
+
+    <main>
+      <section class="settings-section">
+        <div class="section-header">
+          <span class="section-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+            </svg>
+          </span>
+          <h2>Chat Customization Options</h2>
+        </div>
+
+        <div class="settings-card">
+          <div class="setting-item" id="dividerColorContainer">
+            <div class="setting-info">
+              <label for="dividerColor" class="setting-label">Divider Color</label>
+              <p class="setting-description">
+                Customize the color of chat section dividers
+              </p>
+            </div>
+            <div class="setting-controls">
+              <div class="color-picker-wrapper">
+                <input
+                  type="color"
+                  id="dividerColor"
+                  class="color-picker"
+                  value="#3c4043"
+                  title="Choose divider color"
+                />
+              </div>
+              <label class="toggle">
+                <input type="checkbox" id="dividerColorEnabled" checked />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="setting-item" id="promptBubbleColorContainer">
+            <div class="setting-info">
+              <label for="promptBubbleColor" class="setting-label">Prompt Bubble Color</label>
+              <p class="setting-description">
+                Customize the background color of user prompt bubbles
+              </p>
+            </div>
+            <div class="setting-controls">
+              <div class="color-picker-wrapper">
+                <input
+                  type="color"
+                  id="promptBubbleColor"
+                  class="color-picker"
+                  value="#1e1f20"
+                  title="Choose prompt bubble color"
+                />
+              </div>
+              <label class="toggle">
+                <input
+                  type="checkbox"
+                  id="promptBubbleColorEnabled"
+                  checked
+                />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="setting-item" id="responseAreaColorContainer">
+            <div class="setting-info">
+              <label for="responseAreaColor" class="setting-label">Response Area Background</label>
+              <p class="setting-description">
+                Customize the background color of response areas
+              </p>
+            </div>
+            <div class="setting-controls">
+              <div class="color-picker-wrapper">
+                <input
+                  type="color"
+                  id="responseAreaColor"
+                  class="color-picker"
+                  value="#131314"
+                  title="Choose response area background color"
+                />
+              </div>
+              <label class="toggle">
+                <input
+                  type="checkbox"
+                  id="responseAreaColorEnabled"
+                  checked
+                />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="setting-item setting-placeholder" id="inputBarColorContainer">
+            <div class="setting-info">
+              <div class="setting-label-row">
+                <span class="setting-label">Input Bar</span>
+                <span class="badge-coming-soon">Coming Soon</span>
+              </div>
+              <p class="setting-description">
+                Customize prompt input bar background and border colors (Coming Soon)
+              </p>
+            </div>
+            <div class="setting-controls">
+              <div class="color-picker-wrapper">
+                <input
+                  type="color"
+                  id="inputBarColor"
+                  class="color-picker"
+                  value="#1e1f20"
+                  disabled
+                  title="Coming Soon"
+                />
+              </div>
+              <label class="toggle toggle-disabled" title="Coming Soon">
+                <input
+                  type="checkbox"
+                  id="inputBarColorEnabled"
+                  disabled
+                />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="setting-item setting-placeholder" id="codeBlockColorContainer">
+            <div class="setting-info">
+              <div class="setting-label-row">
+                <span class="setting-label">Code Block</span>
+                <span class="badge-coming-soon">Coming Soon</span>
+              </div>
+              <p class="setting-description">
+                Customize code block and syntax highlighting background colors (Coming Soon)
+              </p>
+            </div>
+            <div class="setting-controls">
+              <div class="color-picker-wrapper">
+                <input
+                  type="color"
+                  id="codeBlockColor"
+                  class="color-picker"
+                  value="#0e0e10"
+                  disabled
+                  title="Coming Soon"
+                />
+              </div>
+              <label class="toggle toggle-disabled" title="Coming Soon">
+                <input
+                  type="checkbox"
+                  id="codeBlockColorEnabled"
+                  disabled
+                />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="setting-item setting-placeholder" id="sidebarColorContainer">
+            <div class="setting-info">
+              <div class="setting-label-row">
+                <span class="setting-label">Sidebar</span>
+                <span class="badge-coming-soon">Coming Soon</span>
+              </div>
+              <p class="setting-description">
+                Customize sidebar navigation and chat history styling (Coming Soon)
+              </p>
+            </div>
+            <div class="setting-controls">
+              <div class="color-picker-wrapper">
+                <input
+                  type="color"
+                  id="sidebarColor"
+                  class="color-picker"
+                  value="#171719"
+                  disabled
+                  title="Coming Soon"
+                />
+              </div>
+              <label class="toggle toggle-disabled" title="Coming Soon">
+                <input
+                  type="checkbox"
+                  id="sidebarColorEnabled"
+                  disabled
+                />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="setting-item setting-placeholder" id="selectedChatColorContainer">
+            <div class="setting-info">
+              <div class="setting-label-row">
+                <span class="setting-label">Selected Chat</span>
+                <span class="badge-coming-soon">Coming Soon</span>
+              </div>
+              <p class="setting-description">
+                Customize the active chat conversation highlight in the sidebar (Coming Soon)
+              </p>
+            </div>
+            <div class="setting-controls">
+              <div class="color-picker-wrapper">
+                <input
+                  type="color"
+                  id="selectedChatColor"
+                  class="color-picker"
+                  value="#282a2c"
+                  disabled
+                  title="Coming Soon"
+                />
+              </div>
+              <label class="toggle toggle-disabled" title="Coming Soon">
+                <input
+                  type="checkbox"
+                  id="selectedChatColorEnabled"
+                  disabled
+                />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="setting-item setting-placeholder" id="onHoverColorContainer">
+            <div class="setting-info">
+              <div class="setting-label-row">
+                <span class="setting-label">On Hover</span>
+                <span class="badge-coming-soon">Coming Soon</span>
+              </div>
+              <p class="setting-description">
+                Customize hover accent colors on buttons and interactive elements (Coming Soon)
+              </p>
+            </div>
+            <div class="setting-controls">
+              <div class="color-picker-wrapper">
+                <input
+                  type="color"
+                  id="onHoverColor"
+                  class="color-picker"
+                  value="#333538"
+                  disabled
+                  title="Coming Soon"
+                />
+              </div>
+              <label class="toggle toggle-disabled" title="Coming Soon">
+                <input
+                  type="checkbox"
+                  id="onHoverColorEnabled"
+                  disabled
+                />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="actions">
+        <button id="saveButton" class="btn-primary">
+          <span class="btn-text">Save Settings</span>
+          <span class="btn-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+              <polyline points="17 21 17 13 7 13 7 21"></polyline>
+              <polyline points="7 3 7 8 15 8"></polyline>
+            </svg>
+          </span>
+        </button>
+        <span id="saveStatus" class="save-status"></span>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <p class="version">Version 1.2.0</p>
+        <div class="footer-divider"></div>
+        <p class="footer-credit">
+          Originally created by
+          <a href="https://balakumar.dev" target="_blank" rel="noopener">Bala Kumar</a>
+          <span class="footer-separator">|</span>
+          <a href="mailto:mail@balakumar.dev" class="footer-email">mail@balakumar.dev</a>
+        </p>
+        <p class="footer-credit">
+          Fork maintained by
+          <a href="https://github.com/Jayant-Gade" target="_blank" rel="noopener">Jayant Gade</a>
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="customize-options.js"></script>
+</body>
+
+</html>

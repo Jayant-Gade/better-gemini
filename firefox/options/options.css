@@ -237,6 +237,72 @@ main {
   background-color: rgba(139, 92, 246, 0.06);
 }
 
+/* Clickable setting item / row button */
+a.setting-item,
+.setting-item-clickable {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.setting-item.sub-setting.setting-item-clickable:hover {
+  background-color: rgba(139, 92, 246, 0.1);
+}
+
+.setting-item-clickable:hover .btn-secondary {
+  background: var(--bg-card-hover);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.setting-item-clickable:active {
+  background-color: rgba(139, 92, 246, 0.14);
+}
+
+/* Collapsible setting item */
+.collapsable-setting {
+  cursor: pointer;
+}
+
+.collapsable-setting .setting-info {
+  cursor: pointer;
+  user-select: none;
+}
+
+.collapsable-setting:hover .setting-label {
+  color: var(--accent-primary);
+}
+
+/* Collapse indicator arrow */
+.collapse-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.collapse-indicator:hover {
+  background-color: var(--bg-tertiary);
+  color: var(--accent-primary);
+}
+
+.collapse-arrow {
+  transition: transform var(--transition-normal);
+  transform-origin: center;
+  transform: rotate(-90deg);
+}
+
+.collapse-indicator.expanded .collapse-arrow {
+  transform: rotate(0deg);
+  color: var(--accent-primary);
+}
+
 .setting-info {
   flex: 1;
   padding-right: 20px;
@@ -254,6 +320,34 @@ main {
 
 .setting-item:hover .setting-label {
   color: var(--accent-primary);
+}
+
+.setting-label-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.setting-label-row .setting-label {
+  margin-bottom: 0;
+}
+
+.badge-coming-soon {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  background: rgba(139, 92, 246, 0.15);
+  color: #c4b5fd;
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  line-height: 1.4;
+  user-select: none;
+  white-space: nowrap;
 }
 
 .setting-description {
@@ -323,6 +417,22 @@ main {
   border-color: var(--accent-primary);
 }
 
+/* Disabled Toggle */
+.toggle.toggle-disabled,
+.toggle input:disabled + .toggle-slider {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.toggle.toggle-disabled:hover .toggle-slider,
+.toggle input:disabled + .toggle-slider:hover {
+  border-color: var(--border-secondary);
+}
+
+.toggle input:disabled + .toggle-slider:before {
+  background-color: var(--text-tertiary);
+}
+
 /* Model select dropdown */
 .select-wrapper {
   position: relative;
@@ -375,6 +485,83 @@ main {
   color: var(--accent-primary);
 }
 
+/* Color setting controls */
+.setting-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.color-picker-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.color-picker {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 36px;
+  height: 36px;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  padding: 3px;
+  transition: all var(--transition-fast);
+}
+
+.color-picker:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+.color-picker:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px var(--accent-glow);
+}
+
+.color-picker::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.color-picker::-webkit-color-swatch {
+  border: none;
+  border-radius: 4px;
+}
+
+.color-picker::-moz-color-swatch {
+  border: none;
+  border-radius: 4px;
+}
+
+.color-picker:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  border-color: var(--border-secondary);
+}
+
+.color-picker:disabled:hover {
+  border-color: var(--border-secondary);
+  box-shadow: none;
+}
+
+/* Placeholder setting items */
+.setting-item.setting-placeholder {
+  opacity: 0.85;
+}
+
+.setting-item.setting-placeholder .setting-label {
+  cursor: default;
+}
+
+.setting-item.setting-placeholder:hover .setting-label {
+  color: var(--text-primary);
+}
+
 /* Actions area */
 .actions {
   display: flex;
@@ -424,6 +611,52 @@ main {
   display: flex;
   align-items: center;
   opacity: 0.9;
+}
+
+/* Secondary button */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-secondary);
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* Back navigation link */
+.back-nav {
+  margin-bottom: 20px;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.back-link:hover {
+  color: var(--accent-primary);
+  transform: translateX(-2px);
 }
 
 /* Save status message */
