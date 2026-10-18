@@ -3,7 +3,7 @@
   "name": "Better Gemini (Community Fork): Wide UI & Export",
   "version": "1.2.0",
   "description": "Wide 98% chat layout, quick launch (type 'gem'), export to Markdown, 40+ keyboard shortcuts, default model picker.",
-  "permissions": ["activeTab", "storage"],
+  "permissions": ["activeTab", "storage", "tabs"],
   "host_permissions": ["https://gemini.google.com/*"],
   "background": {
     "service_worker": "background.js",
@@ -20,6 +20,7 @@
         "content/features/export-markdown.js",
         "content/features/export-full-chat.js",
         "content/features/default-model.js",
+        "content/features/customise-chat.js",
         "content/feature-loader.js"
       ],
       "run_at": "document_idle"

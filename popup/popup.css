@@ -127,6 +127,30 @@ body {
   gap: 2px;
 }
 
+.toggle-label-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.badge-beta {
+  display: inline-flex;
+  align-items: center;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  padding: 1px 6px;
+  border-radius: 10px;
+  background: rgba(234, 179, 8, 0.28) !important;
+  color: #fde047 !important;
+  border: 1px solid rgba(250, 204, 21, 0.65) !important;
+  box-shadow: 0 0 6px rgba(234, 179, 8, 0.25);
+  line-height: 1.3;
+  user-select: none;
+  white-space: nowrap;
+}
+
 .toggle-label {
   font-size: 13px;
   font-weight: 500;
