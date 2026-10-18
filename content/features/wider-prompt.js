@@ -142,7 +142,6 @@ textarea {
   /**
    * Initializes the wider prompt feature
    * - Injects CSS styles
-   * - Sets up MutationObserver for dynamic content
    */
   function init() {
     if (isInitialized) return;

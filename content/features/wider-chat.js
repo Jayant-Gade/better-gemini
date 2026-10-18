@@ -1,10 +1,11 @@
 /**
  * Better Gemini Extension - Wider Chat Width Feature
  *
- * This module increases the chat container width for a better reading experience.
+ * This module increases the chat container and table block width for a better reading experience.
  *
  * Features:
- * - Injects CSS to set max-width to 98% on conversation containers and table blocks
+ * - Injects CSS to set max-width to 98% on conversation containers
+ * - Expands table blocks and nested table containers to full width
  * - Uses MutationObserver to handle dynamically loaded content
  * - Persists styles across SPA navigation
  *
@@ -25,29 +26,12 @@
 
   const WIDER_CHAT_CSS = `
 .conversation-container,
-.input-area-container,
 .bottom-container,response-element,.md-content,.md-content:not(#_):not(#_),
-.md-content > :not(#_):not(#_),
+.md-content > :not(#_):not(#_),.input-area-container,
 .md-content > * ,.inline-preview-container,
-user-query,
-table-block,
-.table-block,
-.table-content {
+user-query {
   max-width: 98% !important;
   width: 98% !important;
-}
-
-/* Expanded styling for table-block containers and nested tables */
-table-block,
-div.table-block,.md-content,
-div.table-block .table-content,
-div.table-block .table-content table,message-actions {
-  width: 100% !important;
-  max-width: 100% !important;
-  min-width: 100% !important;
-  margin-inline: 0 !important;
-  padding-inline: 1% !important;
-  box-sizing: border-box !important;
 }
 
 thinking-overlay{
@@ -59,6 +43,36 @@ thinking-overlay{
   box-sizing: border-box !important;
   
 }
+
+  
+/* Expanded styling for table-block containers and nested tables */
+table-block,
+div.table-block,.md-content,
+div.table-block .table-content,
+div.table-block .table-content table,message-actions {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 100% !important;
+  margin-inline: 0 !important;
+  padding-inline: 1% !important;
+  box-sizing: border-box !important;
+  
+}
+.table-block.has-scrollbar {
+  max-width: 98% !important;
+}
+
+/*Expands weather widget*/
+.forecast-scroller,.weather-card {
+  width: 98% !important;
+  max-width: 98% !important;
+  min-width: 98% !important;
+  margin-inline: 0 !important;
+  padding-inline: 1% !important;
+  box-sizing: border-box !important;
+  
+}
+
 
 /* Remove margins and expand the response action bar/footer */
 .response-container-footer,
@@ -74,25 +88,6 @@ message-actions[footer],
   box-sizing: border-box !important;
 }
 
-/*Expands weather widget*/
-.forecast-scroller,.weather-card {
-  width: 98% !important;
-  max-width: 98% !important;
-  min-width: 98% !important;
-  margin-inline: 0 !important;
-  padding-inline: 1% !important;
-  box-sizing: border-box !important;
-  
-}
-
-/* Allow table wrappers to use available width without clipping */
-table-block {
-  display: block !important;
-}
-
-.table-block.has-scrollbar {
-  max-width: 98% !important;
-}
 `;
 
   // Selectors to watch for dynamic content
@@ -102,7 +97,7 @@ table-block {
     ".bottom-container",
     "user-query",
     "table-block",
-    ".table-block",
+    "div.table-block",
   ];
 
   // ========== STATE ==========
@@ -128,7 +123,10 @@ table-block {
     style.type = "text/css";
     style.textContent = WIDER_CHAT_CSS;
 
-    (document.head || document.documentElement).appendChild(style);
+    const targetParent = document.head || document.documentElement;
+    if (targetParent) {
+      targetParent.appendChild(style);
+    }
 
     return style;
   }
@@ -179,7 +177,7 @@ table-block {
   function setupObserver() {
     const mutationObserver = new MutationObserver(handleMutations);
 
-    mutationObserver.observe(document.body || document.documentElement, {
+    mutationObserver.observe(document.body, {
       childList: true,
       subtree: true,
     });
@@ -191,6 +189,7 @@ table-block {
 
   /**
    * Initializes the wider chat feature
+   * - Injects CSS styles
    */
   function init() {
     if (isInitialized) return;
@@ -208,7 +207,7 @@ table-block {
     isInitialized = false;
   }
 
-  // ========== EXPORTS & AUTO-RUN ==========
+  // ========== EXPORTS ==========
 
   if (IS_TEST_ENV_WIDER) {
     module.exports = {
@@ -233,12 +232,5 @@ table-block {
       init,
       destroy,
     };
-
-    // Run automatically when loaded as a Chrome content script
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", init);
-    } else {
-      init();
-    }
   }
 })();

@@ -135,24 +135,10 @@
               </p>
             </div>
             <div class="setting-controls">
-              <span
-                class="collapse-indicator collapsed"
-                id="themeCollapseIcon"
-                title="Expand options"
-                role="button"
-                tabindex="0"
-              >
-                <svg
-                  class="collapse-arrow"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
+              <span class="collapse-indicator collapsed" id="themeCollapseIcon" title="Expand options" role="button"
+                tabindex="0">
+                <svg class="collapse-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                   <polyline points="6 9 12 15 18 9"></polyline>
                 </svg>
               </span>
@@ -172,13 +158,8 @@
             </div>
             <div class="setting-controls">
               <div class="color-picker-wrapper">
-                <input
-                  type="color"
-                  id="dividerColor"
-                  class="color-picker"
-                  value="#3c4043"
-                  title="Choose divider color"
-                />
+                <input type="color" id="dividerColor" class="color-picker" value="#3c4043"
+                  title="Choose divider color" />
               </div>
               <label class="toggle">
                 <input type="checkbox" id="dividerColorEnabled" checked />
@@ -196,31 +177,18 @@
             </div>
             <div class="setting-controls">
               <div class="color-picker-wrapper">
-                <input
-                  type="color"
-                  id="promptBubbleColor"
-                  class="color-picker"
-                  value="#1e1f20"
-                  title="Choose prompt bubble color"
-                />
+                <input type="color" id="promptBubbleColor" class="color-picker" value="#1e1f20"
+                  title="Choose prompt bubble color" />
               </div>
               <label class="toggle">
-                <input
-                  type="checkbox"
-                  id="promptBubbleColorEnabled"
-                  checked
-                />
+                <input type="checkbox" id="promptBubbleColorEnabled" checked />
                 <span class="toggle-slider"></span>
               </label>
             </div>
           </div>
 
-          <a
-            href="customize-options.html"
-            class="setting-item sub-setting setting-item-clickable"
-            id="moreCustomizationContainer"
-            style="display: none;"
-          >
+          <a href="customize-options.html" class="setting-item sub-setting setting-item-clickable"
+            id="moreCustomizationContainer" style="display: none;">
             <div class="setting-info">
               <span class="setting-label">More Customization Options</span>
               <p class="setting-description">
@@ -230,16 +198,8 @@
             <div class="setting-controls">
               <span class="btn-secondary" id="moreCustomizationBtn">
                 <span>Open</span>
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
                   <path d="M5 12h14"></path>
                   <polyline points="12 5 19 12 12 19"></polyline>
                 </svg>
@@ -270,10 +230,12 @@
             </div>
             <div class="select-wrapper">
               <select id="selectedModel" class="model-select">
-                <option value="flash-lite">Flash-Lite - Fastest</option>
+                <option value="auto">Auto - Default on new/free accounts</option>
                 <option value="flash">Flash - Quick, all-around</option>
+                <option value="flash-lite">Flash-Lite - Fastest answers</option>
                 <option value="thinking">Thinking - Complex problems</option>
-                <option value="pro">Pro - Advanced math &amp; code</option>
+                <option value="pro">Pro - Advanced reasoning</option>
+                <option value="argon">Argon - Complex tasks</option>
               </select>
               <span class="select-arrow">
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
@@ -293,9 +255,12 @@
             <div class="select-wrapper">
               <select id="selectedEffort" class="model-select">
                 <option value="">Don't change</option>
-                <option value="standard">Standard - Best for most</option>
+                <option value="low">Low - Quick and efficient</option>
+                <option value="medium">Medium - Balanced depth</option>
+                <option value="high">High - Extra thorough</option>
+                <option value="standard">Standard - Legacy accounts</option>
                 <option value="extended">
-                  Extended - Complex problem solving
+                  Extended - Legacy accounts
                 </option>
               </select>
               <span class="select-arrow">

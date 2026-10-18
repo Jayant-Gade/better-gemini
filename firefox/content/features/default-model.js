@@ -15,7 +15,7 @@
  *  - A "Thinking level" submenu (Standard / Extended) controls reasoning effort.
  */
 
-(function() {
+(function () {
   'use strict';
 
   // ============================================================================
@@ -27,15 +27,20 @@
     // label we match against (after stripping any version prefix). Matching is
     // anchored so "Flash" never matches "Flash-Lite" (see nameMatches()).
     MODELS: {
+      auto: { name: 'Auto' },
       'flash-lite': { name: 'Flash-Lite' },
-      flash:        { name: 'Flash' },
-      fast:         { name: 'Flash', alias: 'flash' }, // "fast" is an alias for Flash
-      thinking:     { name: 'Thinking' },
-      pro:          { name: 'Pro' },
+      flash: { name: 'Flash' },
+      fast: { name: 'Flash', alias: 'flash' }, // "fast" is an alias for Flash
+      thinking: { name: 'Thinking' },
+      pro: { name: 'Pro' },
+      argon: { name: 'Argon' },
     },
 
     // Thinking-effort levels (the "Thinking level" submenu inside the mode picker).
     EFFORTS: {
+      low: { name: 'Low' },
+      medium: { name: 'Medium' },
+      high: { name: 'High' },
       standard: { name: 'Standard' },
       extended: { name: 'Extended' },
     },
@@ -91,9 +96,11 @@
     return String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
 
-  // Strips a leading version token ("3.1 ", "3.5 ") from a label.
+  // Strips optional leading "Gemini " and version token ("3.1 ", "3.5 ", "3.6 ", "3.8 ", "4 ") from a label.
   function stripVersionPrefix(text) {
-    return String(text || '').replace(/^\s*\d+(?:\.\d+)*\s+/, '').trim();
+    return String(text || '')
+      .replace(/^\s*(?:gemini\s+)?(?:\d+(?:\.\d+)*\s+)?/i, '')
+      .trim();
   }
 
   // True if `label` names `name` as its leading tier, NOT followed by a hyphen or
@@ -257,6 +264,23 @@
   }
 
   /**
+   * Checks whether a menu option is locked (e.g. requires Google Plus/pro/ultra).
+   */
+  function isOptionLocked(element) {
+    if (!element) return true;
+    if (element.getAttribute('aria-disabled') === 'true' || element.disabled) return true;
+    if (element.classList.contains('disabled') || element.classList.contains('locked')) return true;
+    const hasLockIcon = element.querySelector(
+      'mat-icon, [data-icon*="lock"], [aria-label*="lock" i], svg'
+    );
+    if (hasLockIcon) {
+      const lockText = (element.getAttribute('aria-label') || '') + ' ' + element.innerHTML;
+      if (/lock/i.test(lockText)) return true;
+    }
+    return false;
+  }
+
+  /**
    * Finds the menu option element for a model key (menu must be open).
    */
   function findModelOption(modelKey) {
@@ -264,7 +288,7 @@
     if (!model) return null;
 
     const options = Array.from(document.querySelectorAll(CONFIG.SELECTORS.MODEL_OPTION));
-    let option = options.find(opt => nameMatches(opt.textContent || '', model.name));
+    let option = options.find(opt => nameMatches(opt.textContent || '', model.name) && !isOptionLocked(opt));
 
     // Fallback for UI variants: role-based menu items, excluding the sign-in row
     // and the "Thinking level" submenu trigger.
@@ -273,7 +297,7 @@
       option = Array.from(items).find(opt => {
         const t = (opt.textContent || '').toLowerCase();
         if (t.includes('sign in') || t.includes('thinking level')) return false;
-        return nameMatches(opt.textContent || '', model.name);
+        return nameMatches(opt.textContent || '', model.name) && !isOptionLocked(opt);
       });
     }
     return option || null;
@@ -522,13 +546,13 @@
     let lastUrl = window.location.href;
 
     const originalPushState = history.pushState;
-    history.pushState = function() {
+    history.pushState = function () {
       originalPushState.apply(history, arguments);
       handleNavigation();
     };
 
     const originalReplaceState = history.replaceState;
-    history.replaceState = function() {
+    history.replaceState = function () {
       originalReplaceState.apply(history, arguments);
       handleNavigation();
     };
@@ -549,7 +573,7 @@
           for (const node of mutation.addedNodes) {
             if (node.nodeType === Node.ELEMENT_NODE) {
               if (node.matches?.(CONFIG.SELECTORS.MODEL_PICKER_BUTTON) ||
-                  node.querySelector?.(CONFIG.SELECTORS.MODEL_PICKER_BUTTON)) {
+                node.querySelector?.(CONFIG.SELECTORS.MODEL_PICKER_BUTTON)) {
                 log('Model picker appeared');
                 waitAndApplyModel();
                 return;
