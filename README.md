@@ -16,7 +16,7 @@ A browser extension that enhances Google Gemini with wider chat layout, Markdown
 - **Wide Chat Layout**: Expands chat width to 98% of the screen for better readability of code and tables.
 - **Export to Markdown**: Copy individual responses as Markdown or export the entire session.
 - **40+ Keyboard Shortcuts**: Power-user shortcuts with an in-app help overlay (`Ctrl+Shift+?` / `Cmd+Shift+?`).
-- **Default Model Selector**: Automatically switch to your preferred model (Flash-Lite, Flash, Thinking, Pro) and reasoning effort.
+- **Default Model Selector**: Automatically switch to your preferred model (Flash-Lite, Hydrogen, Flash, Pro, Argon, Carbon, Thinking) and reasoning effort.
 - **Omnibox Quick Launch**: Type `gem` in the address bar, press `Tab`, and submit queries directly to Gemini.
 - **Extension Popup & Options**: Easily toggle features and manage settings.
 

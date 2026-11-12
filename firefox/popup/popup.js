@@ -29,6 +29,7 @@ const elements = {
   customizeChat: null,
   defaultModel: null,
   openSettings: null,
+  openCustomizeSettings: null,
   saveIndicator: null,
 };
 
@@ -47,6 +48,7 @@ function initializeElements() {
   elements.customizeChat = document.getElementById("customizeChat");
   elements.defaultModel = document.getElementById("defaultModel");
   elements.openSettings = document.getElementById("openSettings");
+  elements.openCustomizeSettings = document.getElementById("openCustomizeSettings");
   elements.saveIndicator = document.getElementById("saveIndicator");
 }
 
@@ -129,8 +131,30 @@ function showSaveIndicator() {
  * Open the full options page
  */
 function openOptionsPage(event) {
-  event.preventDefault();
-  chrome.runtime.openOptionsPage();
+  if (event) event.preventDefault();
+  if (chrome.runtime && chrome.runtime.openOptionsPage) {
+    chrome.runtime.openOptionsPage(() => {
+      if (chrome.runtime.lastError) {
+        chrome.tabs.create({ url: chrome.runtime.getURL("options/options.html") });
+      }
+    });
+  } else if (chrome.tabs && chrome.tabs.create) {
+    chrome.tabs.create({ url: chrome.runtime.getURL("options/options.html") });
+  } else {
+    window.open(chrome.runtime.getURL("options/options.html"));
+  }
+}
+
+/**
+ * Open the theme customization page
+ */
+function openCustomizePage(event) {
+  if (event) event.preventDefault();
+  if (chrome.tabs && chrome.tabs.create) {
+    chrome.tabs.create({ url: chrome.runtime.getURL("options/customize-options.html") });
+  } else {
+    window.open(chrome.runtime.getURL("options/customize-options.html"));
+  }
 }
 
 /**
@@ -152,8 +176,20 @@ function attachEventListeners() {
     toggle.addEventListener("change", saveSettings);
   });
 
-  // Open settings link
-  elements.openSettings.addEventListener("click", openOptionsPage);
+  // Open settings links
+  if (elements.openSettings) {
+    elements.openSettings.addEventListener("click", openOptionsPage);
+  }
+  if (elements.openCustomizeSettings) {
+    elements.openCustomizeSettings.addEventListener("click", openCustomizePage);
+  }
+
+  // Failsafe for any .settings-link in the popup
+  document.querySelectorAll(".settings-link").forEach((link) => {
+    if (link !== elements.openSettings && link !== elements.openCustomizeSettings) {
+      link.addEventListener("click", openOptionsPage);
+    }
+  });
 }
 
 /**

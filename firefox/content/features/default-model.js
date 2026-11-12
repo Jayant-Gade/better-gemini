@@ -26,14 +26,17 @@
     // Model tiers keyed by the value stored in settings. `name` is the stable tier
     // label we match against (after stripping any version prefix). Matching is
     // anchored so "Flash" never matches "Flash-Lite" (see nameMatches()).
+    // `category` matches Gemini UI header labels (e.g. "Quick answers", "Everyday help").
     MODELS: {
-      auto: { name: 'Auto' },
-      'flash-lite': { name: 'Flash-Lite' },
-      flash: { name: 'Flash' },
+      auto: { name: 'Auto', category: 'Auto' },
+      'flash-lite': { name: 'Flash-Lite', category: 'Quick answers', aliases: ['Fastest answers'] },
+      hydrogen: { name: 'Hydrogen', category: 'Everyday help' },
+      pro: { name: 'Pro', category: 'Detailed research', aliases: ['Advanced reasoning'] },
+      argon: { name: 'Argon', category: 'Code & analysis', aliases: ['Complex tasks'] },
+      carbon: { name: 'Carbon', category: 'Most complex work' },
+      flash: { name: 'Flash', category: 'Quick, all-around', aliases: ['All-around help'] },
       fast: { name: 'Flash', alias: 'flash' }, // "fast" is an alias for Flash
-      thinking: { name: 'Thinking' },
-      pro: { name: 'Pro' },
-      argon: { name: 'Argon' },
+      thinking: { name: 'Thinking', category: 'Complex problems' },
     },
 
     // Thinking-effort levels (the "Thinking level" submenu inside the mode picker).
@@ -103,12 +106,51 @@
       .trim();
   }
 
-  // True if `label` names `name` as its leading tier, NOT followed by a hyphen or
+  // True if `label` names `name` as its tier, NOT followed by a hyphen or
   // word character. This is what keeps "Flash" from matching "Flash-Lite" while
   // still matching "Flash All-around help" (and "Flash-Lite" matching itself).
   function nameMatches(label, name) {
+    if (!label || !name) return false;
     const stripped = stripVersionPrefix(label).toLowerCase();
-    return new RegExp('^' + escapeRe(name.toLowerCase()) + '(?![-\\w])').test(stripped);
+    const target = name.toLowerCase();
+
+    // Leading tier match (original behavior, e.g. "Flash-Lite - Fastest", "Flash All-around")
+    if (new RegExp('^' + escapeRe(target) + '(?![-\\w])').test(stripped)) {
+      return true;
+    }
+
+    // Multi-line check (when Gemini renders header in line 1 and model name in line 2)
+    const lines = String(label).split(/[\r\n]+/);
+    if (lines.length > 1) {
+      for (const line of lines) {
+        const lineStripped = stripVersionPrefix(line).toLowerCase();
+        if (new RegExp('^' + escapeRe(target) + '(?![-\\w])').test(lineStripped)) {
+          return true;
+        }
+      }
+    }
+
+    // Substring match with word/hyphen boundary (e.g. "Quick answers 3.5 Flash-Lite")
+    return new RegExp('(^|[^-\\w])' + escapeRe(target) + '(?![-\\w])', 'i').test(label);
+  }
+
+  function categoryMatches(label, category) {
+    if (!label || !category) return false;
+    const norm = String(label).toLowerCase().replace(/\s+/g, ' ');
+    const cat = category.toLowerCase().replace(/\s+/g, ' ');
+    return norm.includes(cat);
+  }
+
+  function modelMatches(label, model) {
+    if (!label || !model) return false;
+    if (nameMatches(label, model.name)) return true;
+    if (model.category && categoryMatches(label, model.category)) return true;
+    if (Array.isArray(model.aliases)) {
+      for (const alias of model.aliases) {
+        if (categoryMatches(label, alias) || nameMatches(label, alias)) return true;
+      }
+    }
+    return false;
   }
 
   // ============================================================================
@@ -226,7 +268,7 @@
 
     for (const [key, model] of Object.entries(CONFIG.MODELS)) {
       if (model.alias) continue; // only reverse-map to canonical keys
-      if (nameMatches(text, model.name)) return key;
+      if (modelMatches(text, model)) return key;
     }
     return null;
   }
@@ -288,7 +330,7 @@
     if (!model) return null;
 
     const options = Array.from(document.querySelectorAll(CONFIG.SELECTORS.MODEL_OPTION));
-    let option = options.find(opt => nameMatches(opt.textContent || '', model.name) && !isOptionLocked(opt));
+    let option = options.find(opt => modelMatches(opt.textContent || '', model) && !isOptionLocked(opt));
 
     // Fallback for UI variants: role-based menu items, excluding the sign-in row
     // and the "Thinking level" submenu trigger.
@@ -297,7 +339,7 @@
       option = Array.from(items).find(opt => {
         const t = (opt.textContent || '').toLowerCase();
         if (t.includes('sign in') || t.includes('thinking level')) return false;
-        return nameMatches(opt.textContent || '', model.name) && !isOptionLocked(opt);
+        return modelMatches(opt.textContent || '', model) && !isOptionLocked(opt);
       });
     }
     return option || null;
@@ -660,6 +702,8 @@
       applyDefaults,
       applyDefaultModel,
       nameMatches,
+      modelMatches,
+      categoryMatches,
       stripVersionPrefix,
     };
   }
@@ -673,6 +717,9 @@
       applyDefaultModel,
       applyEffort,
       getModelFromUrl,
+      nameMatches,
+      modelMatches,
+      categoryMatches,
       // Exposed for debugging / testing
       getPreferredModel: () => currentPreferredModel,
       setPreferredModel: (model) => { currentPreferredModel = model; },
